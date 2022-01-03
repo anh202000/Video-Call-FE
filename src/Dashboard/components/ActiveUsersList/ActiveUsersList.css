@@ -24,6 +24,12 @@
   .active_user_list_text {
     font-size: 24px;
   }
+
+  div.active_user_list_text {
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow: "..."; 
+  }
   
   .active_user_list_image {
     width: 100%;
