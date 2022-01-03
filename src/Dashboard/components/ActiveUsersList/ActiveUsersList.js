@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import './ActiveUsersList.css';
 import ActiveUsersListItem from './ActiveUsersListItem.js'
 
@@ -17,14 +18,19 @@ const ActiveUsers = [
     }
 ]
 
-const ActiveUsersList = () => {
+const ActiveUsersList = ({activeUsers}) => {
+console.log(activeUsers,'activeUsers')
     return (
         <div className="active_user_list_container">
-           {
-               ActiveUsers.map((ActiveUsers) => <ActiveUsersListItem key={ActiveUsers.socketId} ActiveUsers={ActiveUsers}/>)
-           }
+            {
+                activeUsers?.map((activeUser) => <ActiveUsersListItem key={activeUser.socketId} activeUser={activeUser} />)
+            }
         </div>
     );
 };
 
-export default ActiveUsersList;
+const mapStateToProps = ({ dashboard }) => ({
+    ...dashboard
+  });
+  
+  export default connect(mapStateToProps)(ActiveUsersList);

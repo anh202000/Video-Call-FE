@@ -4,7 +4,7 @@ import userAvatar from '../../../resources/userAvatar.png';
 
 const ActiveUsersListItem = (props) => {
 
-    const { ActiveUsers } = props
+    const { activeUser } = props
     console.log(props)
 
     const handleListItemPressed = () => {
@@ -16,7 +16,7 @@ const ActiveUsersListItem = (props) => {
           <div className="active_user_list_image_container">
               <img className="active_user_list_image" src={userAvatar} />
           </div>
-          <span className="active_list_user_text">{ActiveUsers?.username}</span>
+          <span className="active_list_user_text">{activeUser?.username}</span>
         </div>
     );
 };
