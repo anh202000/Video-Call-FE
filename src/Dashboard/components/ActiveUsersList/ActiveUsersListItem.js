@@ -3,6 +3,7 @@ import './ActiveUsersList.css';
 import userAvatar from '../../../resources/userAvatar.png';
 import Avatar, { AvatarItem } from '@atlaskit/avatar';
 import Tooltip from '@atlaskit/tooltip';
+import { callToOtherUser } from "../../../utils/webRTC/webRTCHandler";
 
 const ActiveUsersListItem = (props) => {
 
@@ -10,7 +11,7 @@ const ActiveUsersListItem = (props) => {
     console.log(props)
 
     const handleListItemPressed = () => {
-        // call to other user
+        callToOtherUser(activeUser)
     }
 
     const username = activeUser?.username?.length > 12 ? activeUser?.username.slice(0, 12) + '...' : activeUser?.username

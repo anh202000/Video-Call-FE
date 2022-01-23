@@ -1,29 +1,34 @@
-import socketClient from 'socket.io-client';
-import * as dashboardActions from '../../store/actions/dashboardActions'
-import store from '../../store/store';
+import socketClient from "socket.io-client";
+import * as dashboardActions from "../../store/actions/dashboardActions";
+import store from "../../store/store";
+import * as webRTCHandler from '../webRTC/webRTCHandler'
 
-const SERVER = 'http://localhost:5000'
+const SERVER = "http://localhost:5000";
 
 const broadcastEventTypes = {
-  ACTIVE_USERS: 'ACTIVE_USERS',
-  GROUP_CALL_ROOMS: 'GROUP_CALL_ROOMS'
-}
+  ACTIVE_USERS: "ACTIVE_USERS",
+  GROUP_CALL_ROOMS: "GROUP_CALL_ROOMS",
+};
 
 let socket;
 
 export const connectWithWebSocket = () => {
   socket = socketClient(SERVER);
 
-  socket.on('connection', () => {
-    console.log('succesfully connected with wss server');
+  socket.on("connection", () => {
+    console.log("succesfully connected with wss server");
     console.log(socket.id);
   });
 
-  socket.on('broadcast', (data) => {
+  socket.on("broadcast", (data) => {
     broadcastEventEvents(data);
+  });
+
+  // listeners related with direct call
+  socket.on('pre-offer', (data) => {
+    webRTCHandler.handlePreOffer(data);
   })
-}
-  ;
+};
 
 export const registerNewUser = (username) => {
   socket.emit("register-new-user", {
@@ -32,14 +37,22 @@ export const registerNewUser = (username) => {
   });
 };
 
+// emitting events to server related with direct call
+
+export const sendPreOffer = (data) => {
+  socket.emit("pre-offer", data);
+};
+
 const broadcastEventEvents = (data) => {
   switch (data.event) {
     case broadcastEventTypes.ACTIVE_USERS:
-      // filter lọc ra những thằng user trên server 
-      const activeUsers = data?.activeUsers.filter((activeUser) => activeUser.socketId !== socket.id);
+      // filter lọc ra những thằng user trên server
+      const activeUsers = data?.activeUsers.filter(
+        (activeUser) => activeUser.socketId !== socket.id
+      );
       store.dispatch(dashboardActions.setActiveUsers(activeUsers));
       break;
     default:
       break;
   }
-}
+};
