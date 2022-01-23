@@ -1,7 +1,7 @@
 import socketClient from "socket.io-client";
 import * as dashboardActions from "../../store/actions/dashboardActions";
 import store from "../../store/store";
-import * as webRTCHandler from '../webRTC/webRTCHandler'
+import * as webRTCHandler from "../webRTC/webRTCHandler";
 
 const SERVER = "http://localhost:5000";
 
@@ -25,9 +25,9 @@ export const connectWithWebSocket = () => {
   });
 
   // listeners related with direct call
-  socket.on('pre-offer', (data) => {
+  socket.on("pre-offer", (data) => {
     webRTCHandler.handlePreOffer(data);
-  })
+  });
 };
 
 export const registerNewUser = (username) => {
@@ -41,6 +41,10 @@ export const registerNewUser = (username) => {
 
 export const sendPreOffer = (data) => {
   socket.emit("pre-offer", data);
+};
+
+export const sendPreOfferAnswer = (data) => {
+  socket.emit("pre-offer-anwser", data);
 };
 
 const broadcastEventEvents = (data) => {
