@@ -11,8 +11,6 @@ import './LoginPage.css';
 const LoginPage = ({ saveUsername }) => {
   const [username, setUsername] = useState('');
 
-  console.log(username,'save')
-
   const history = useHistory();
 
   const handleSubmitButtonPressed = () => {

@@ -3,8 +3,6 @@ import React, { useEffect } from 'react';
 import './CallRejectedDialog.css';
 
 const CallRejectedDialog = ({ reason, hideCallRejectedDialog }) => {
-  console.log(reason, 'reason')
-  console.log(hideCallRejectedDialog, 'reason')
   useEffect(() => {
     setTimeout(() => {
       hideCallRejectedDialog({

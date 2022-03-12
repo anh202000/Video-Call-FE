@@ -9,7 +9,6 @@ import { callStates, setCallRejected } from "../../../store/actions/callActions"
 
 const DirectCall = (props) => {
   const { localStream, remoteStream, callState, callerUserName, callingDialogVisible, callRejected, hideCallRejectedDialog } = props;
-  console.log(props, 'props ')
   return (
     <>
       <LocalVideoView localStream={localStream} />
