@@ -5,6 +5,10 @@ const initState = {
   callState: callActions.callStates.CALL_UNAVAILABLE,
   callingDialogVisible: false,
   callerUserName: '',
+  callRejected: {
+    rejected: false,
+    reason: ''
+  }
 };
 
 const callReducer = (state = initState, action) => {
@@ -28,6 +32,11 @@ const callReducer = (state = initState, action) => {
       return {
         ...state,
         callerUserName: action.callerUserName
+      };
+    case callActions.CALL_SET_CALL_REJECTED:
+      return {
+        ...state,
+        callRejected: action.callRejected
       };
     default:
       return state;

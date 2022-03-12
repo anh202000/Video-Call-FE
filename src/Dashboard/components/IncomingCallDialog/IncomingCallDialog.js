@@ -1,23 +1,25 @@
 import React from 'react';
-// import { acceptIncomingCallRequest, rejectIncomingCallRequest } from '../../../utils/webRTC/webRTCHandler';
+import { acceptIncomingCallRequest, rejectIncomingCallRequest } from '../../../utils/webRTC/webRTCHandler';
 import ReactLoading from 'react-loading'
 
 import './IncomingCallDialog.css';
 
-const IncomingCallDialog = ({ callerUsername }) => {
+const IncomingCallDialog = (props) => {
+  const { callerUserName } = props
+  console.log(props.callerUserName, 'props')
   const handleAcceptButtonPressed = () => {
-    // acceptIncomingCallRequest();
+    acceptIncomingCallRequest();
   };
 
   const handleRejectButtonPressed = () => {
-    // rejectIncomingCallRequest();
+    rejectIncomingCallRequest();
   };
 
   const LoadingType = 'bubbles'
 
   return (
     <div className='direct_call_dialog background_secondary_color'>
-      <span className='direct_call_dialog_caller_name'>{callerUsername}</span>
+      <span className='direct_call_dialog_caller_name'>{props.callerUserName}</span>
       <div className='direct_call_dialog_button_container'>
         <button className='direct_call_dialog_accept_button' onClick={handleAcceptButtonPressed}>
           Accept
@@ -26,7 +28,7 @@ const IncomingCallDialog = ({ callerUsername }) => {
           Reject
         </button>
       </div>
-      <ReactLoading type={LoadingType} color="#fff" delay='20' height={'2rem'}/>
+      {/* <ReactLoading type={LoadingType} color="#fff" delay='20' height={'2rem'}/> */}
     </div>
   );
 };

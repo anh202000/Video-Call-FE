@@ -29,7 +29,7 @@ const CallingDialog = () => {
       <span>Calling</span>
       {/* <div style={styles.buttonContainer} onClick={handleHangUpButtonPressed}> */}
         {/* <MdCallEnd style={{ width: '20px', height: '20px', fill: '#e6e5e8' }} /> */}
-        <ReactLoading type={LoadingType} color="#fff" delay='20' height={'2rem'}/>
+        {/* <ReactLoading type={LoadingType} color="#fff" delay='20' height={'2rem'}/> */}
       {/* </div> */}
     </div>
   );

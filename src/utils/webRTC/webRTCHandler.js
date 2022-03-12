@@ -2,6 +2,7 @@ import {
   callStates,
   setCallerUserName,
   setCallingDialogVisible,
+  setCallRejected,
   setCallState,
   setLocalStream,
 } from "../../store/actions/callActions";
@@ -19,6 +20,15 @@ const defaultConstrains = {
   audio: true,
 };
 
+const configuration = {
+  iceServers: [{
+    url: 'stun:stun.l.google.com.13902'
+  }]
+}
+
+let connectedUserSocketId;
+let peerConnection;
+
 export const getLocalStream = () => {
   navigator.mediaDevices
     .getUserMedia(defaultConstrains)
@@ -34,8 +44,6 @@ export const getLocalStream = () => {
     });
 };
 
-let connectedUserSocketId;
-
 export const callToOtherUser = (calleeDetails) => {
   connectedUserSocketId = calleeDetails.socketId;
   store.dispatch(setCallState(callStates.CALL_IN_PROGRESS));
@@ -47,6 +55,10 @@ export const callToOtherUser = (calleeDetails) => {
     },
   });
 };
+
+const createPeerConnection = () => {
+  peerConnection =  new RTCPeerConnection(configuration)
+}
 
 export const handlePreOffer = (data) => {
   if (checkIfCallIsPossible()) {
@@ -72,21 +84,44 @@ export const checkIfCallIsPossible = () => {
   }
 };
 
+// call dialog oke
 export const acceptIncomingCallRequest = () => {
   wss.sendPreOfferAnswer({
     callerSocketId: connectedUserSocketId,
-    answer: preOfferAnswers.CALL_ACCEPTED,
+    answer: preOfferAnswers.CALL_ACCEPTED
   });
 
-  resetCallData();
+  store.dispatch(setCallState(callStates.CALL_IN_PROGRESS));
 };
 
+// calling
 export const rejectIncomingCallRequest = () => {
   wss.sendPreOfferAnswer({
     callerSocketId: connectedUserSocketId,
-    answer: preOfferAnswers.CALL_REJECTED,
+    answer: preOfferAnswers.CALL_REJECTED
   });
+  resetCallData();
 };
+
+export const handlePreOfferAnswer = (data) => {
+  console.log(data, 'data')
+  store.dispatch(setCallingDialogVisible(false))
+  if(data.answer === preOfferAnswers.CALL_ACCEPTED) {
+    // TODO SEND WEB RTC OFFER
+    console.log(data, 'data')
+  } else {
+    let rejectionReason = '';
+    if (data.answer === preOfferAnswers.CALL_NOT_AVAILABLE) {
+      rejectionReason = 'Callee is not able to pick up the call right now'
+    } else {
+    rejectionReason = 'Call rejected by the callee'
+    }
+    store.dispatch(setCallRejected({
+      rejected: true,
+      reason: rejectionReason
+    }))
+  }
+}
 
 export const resetCallData = () => {
   connectedUserSocketId = null;
