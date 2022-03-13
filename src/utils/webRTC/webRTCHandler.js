@@ -5,6 +5,7 @@ import {
   setCallRejected,
   setCallState,
   setLocalStream,
+  setRemoteStream,
 } from "../../store/actions/callActions";
 import store from "../../store/store";
 import * as wss from "../wssConnection/wssConnection";
@@ -55,7 +56,7 @@ const createPeerConnection = () => {
   }
 
   peerConnection.ontrack = ({ streams: [stream] }) => {
-    // store.dispatch(setRemoteStream(stream));
+    store.dispatch(setRemoteStream(stream));
   };
 
   peerConnection.onicecandidate = (event) => {
