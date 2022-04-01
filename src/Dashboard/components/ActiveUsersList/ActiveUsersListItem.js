@@ -4,15 +4,18 @@ import userAvatar from '../../../resources/userAvatar.png';
 import Avatar, { AvatarItem } from '@atlaskit/avatar';
 import Tooltip from '@atlaskit/tooltip';
 import { callToOtherUser } from "../../../utils/webRTC/webRTCHandler";
+import { callStates } from "../../../store/actions/callActions";
 
 const ActiveUsersListItem = (props) => {
 
-    const { activeUser } = props
+    const { activeUser, callState } = props
     console.log(props)
 
     const handleListItemPressed = () => {
-        callToOtherUser(activeUser)
-    }
+        if (callState === callStates.CALL_AVAILABLE) {
+            callToOtherUser(activeUser);
+        }
+    };
 
     const username = activeUser?.username?.length > 12 ? activeUser?.username.slice(0, 12) + '...' : activeUser?.username
     const socketId = activeUser?.socketId?.length > 12 ? activeUser?.socketId.slice(0, 12) + '...' : activeUser?.socketId

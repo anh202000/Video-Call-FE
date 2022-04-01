@@ -1,11 +1,13 @@
 import {
   callStates,
+  resetCallDataState,
   setCallerUserName,
   setCallingDialogVisible,
   setCallRejected,
   setCallState,
   setLocalStream,
   setRemoteStream,
+  setScreenSharingActive,
 } from "../../store/actions/callActions";
 import store from "../../store/store";
 import * as wss from "../wssConnection/wssConnection";
@@ -183,6 +185,61 @@ export const handleCandidate = async (data) => {
   } catch (err) {
     console.error('error occured when trying to add received ice candidate', err);
   }
+};
+
+let screenSharingStream;
+
+export const switchForScreenSharingStream = async () => {
+  if (!store.getState().call.screenSharingActive) {
+    try {
+      screenSharingStream = await navigator.mediaDevices.getDisplayMedia({ video: true });
+      store.dispatch(setScreenSharingActive(true));
+      const senders = peerConnection.getSenders();
+      const sender = senders.find(sender => sender.track.kind == screenSharingStream.getVideoTracks()[0].kind);
+      sender.replaceTrack(screenSharingStream.getVideoTracks()[0]);
+    } catch (err) {
+      console.error('error occured when trying to get screen sharing stream', err);
+    }
+  } else {
+    const localStream = store.getState().call.localStream;
+    const senders = peerConnection.getSenders();
+    const sender = senders.find(sender => sender.track.kind == localStream.getVideoTracks()[0].kind);
+    sender.replaceTrack(localStream.getVideoTracks()[0]);
+    store.dispatch(setScreenSharingActive(false));
+    screenSharingStream.getTracks().forEach(track => track.stop());
+  }
+}
+;
+
+export const handleUserHangedUp = () => {
+  resetCallDataAfterHangUp();
+};
+
+export const hangUp = () => {
+  wss.sendUserHangedUp({
+    connectedUserSocketId: connectedUserSocketId
+  });
+
+  resetCallDataAfterHangUp();
+};
+
+const resetCallDataAfterHangUp = () => {
+  peerConnection.close();
+  peerConnection = null;
+  createPeerConnection();
+  resetCallData();
+
+  const localStream = store.getState().call.localStream;
+  localStream.getVideoTracks()[0].enabled = true;
+  localStream.getAudioTracks()[0].enabled = true;
+
+  if (store.getState().call.screenSharingActive) {
+    screenSharingStream.getTracks().forEach(track => {
+      track.stop();
+    });
+  }
+
+  store.dispatch(resetCallDataState());
 };
 
 export const resetCallData = () => {

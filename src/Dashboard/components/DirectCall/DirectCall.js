@@ -5,7 +5,7 @@ import RemoteVideoView from "../RemoteVideoView/RenireVideoview";
 import CallRejectedDialog from "../CallRejectedDialog/CallRejectedDialog"
 import IncomingCallDialog from "../IncomingCallDialog/IncomingCallDialog"
 import CallingDialog from "../CallingDialog/CallingDialog"
-import { callStates, setCallRejected } from "../../../store/actions/callActions";
+import { callStates, setCallRejected, setLocalCameraEnabled, setLocalMicrophoneEnabled } from "../../../store/actions/callActions";
 import ConversationButtons from "../ConversationButtons/ConversationButtons";
 
 const DirectCall = (props) => {
@@ -13,11 +13,11 @@ const DirectCall = (props) => {
   return (
     <>
       <LocalVideoView localStream={localStream} />
-      {remoteStream && <RemoteVideoView remoteStream={remoteStream} />}
+      {remoteStream && callState === callStates.CALL_IN_PROGRESS && <RemoteVideoView remoteStream={remoteStream} />}
       {callRejected.rejected && <CallRejectedDialog reason={callRejected.reason} hideCallRejectedDialog={hideCallRejectedDialog}/>}
       {callState === callStates.CALL_REQUESTED && <IncomingCallDialog callerUserName={callerUserName}/>}
       {callingDialogVisible && <CallingDialog/>}
-      <ConversationButtons/>
+      {remoteStream && callState === callStates.CALL_IN_PROGRESS && <ConversationButtons {...props} />}
     </>
   );
 };
@@ -30,7 +30,9 @@ function mapStoreStateToProps({ call }) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    hideCallRejectedDialog: (callRejectedDetails) => dispatch(setCallRejected(callRejectedDetails))
+    hideCallRejectedDialog: (callRejectedDetails) => dispatch(setCallRejected(callRejectedDetails)),
+    setCameraEnabled: (enabled) => dispatch(setLocalCameraEnabled(enabled)),
+    setMicrophoneEnabled: (enabled) => dispatch(setLocalMicrophoneEnabled(enabled)),
   };
 }
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { MdCallEnd, MdMic, MdMicOff, MdVideocam, MdVideocamOff, MdVideoLabel, MdCamera } from 'react-icons/md';
+import { hangUp, switchForScreenSharingStream } from '../../../utils/webRTC/webRTCHandler';
 import ConversationButton from './ConversationButton';
 // import { switchForScreenSharingStream, hangUp } from '../../../utils/webRTC/webRTCHandler';
 
@@ -41,11 +42,11 @@ const ConversationButtons = (props) => {
   };
 
   const handleScreenSharingButtonPressed = () => {
-    // switchForScreenSharingStream();
+    switchForScreenSharingStream();
   };
 
   const handleHangUpButtonPressed = () => {
-    // hangUp();
+    hangUp();
   };
 
   return (
