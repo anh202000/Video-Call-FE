@@ -51,9 +51,9 @@ const LocalVideoView = (props) => {
           <ConversationViewers {...props} />
         </When>
 
-        <label class="switch">
-          <input type="checkbox" checked={checked} onClick={toggle} />
-          <span class="slider round"></span>
+        <label className="switch">
+          <input type="checkbox" checked={checked} onChange={toggle} />
+          <span className="slider round"></span>
         </label>
       </When>
 

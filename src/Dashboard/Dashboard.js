@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import logo from "../resources/logo.png";
 import ActiveUsersList from "./components/ActiveUsersList/ActiveUsersList";
 import * as webRTCHandler from "../utils/webRTC/webRTCHandler";
+import * as webRTCGroupHandler from "../utils/webRTC/webRTCGroupCallHandler";
 import "./Dashboard.css";
 import DirectCall from "./components/DirectCall/DirectCall";
 import { callStates } from "../store/actions/callActions";
@@ -11,6 +12,7 @@ import { connect } from "react-redux";
 const Dashboard = ({ username, callState }) => {
   useEffect(() => {
     webRTCHandler.getLocalStream();
+    webRTCGroupHandler.connectWithMyPeer();
   }, []);
   return (
     <div className="dashboard_container background_main_color">
