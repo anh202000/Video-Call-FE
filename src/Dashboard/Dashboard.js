@@ -8,6 +8,7 @@ import DirectCall from "./components/DirectCall/DirectCall";
 import { callStates } from "../store/actions/callActions";
 import DashboardInformation from "./components/DashboardInformation/DashboardInformation";
 import { connect } from "react-redux";
+import GroupCallRoomsList from "./components/GroupCallRoomsList/GroupCallRoomsList";
 
 const Dashboard = ({ username, callState }) => {
   useEffect(() => {
@@ -24,7 +25,7 @@ const Dashboard = ({ username, callState }) => {
           )}
         </div>
         <div className="dashboard_rooms_container background_secondary_color">
-          rooms
+          <GroupCallRoomsList />
         </div>
       </div>
       <div className="dashboard_right_section background_secondary_color">
