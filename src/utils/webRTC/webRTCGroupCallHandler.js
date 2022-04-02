@@ -36,17 +36,19 @@ export const connectWithMyPeer = () => {
   // });
 };
 
-// export const createNewGroupCall = () => {
-//   groupCallHost = true;
-//   wss.registerGroupCall({
-//     username: store.getState().dashboard.username,
-//     peerId: myPeerId
-//   });
+export const createNewGroupCall = (props) => {
+  groupCallHost = true;
+  wss.registerGroupCall({
+    username: store.getState().dashboard.username,
+    peerId: myPeerId,
+    roomName: props?.roomName,
+    password: props?.roomName,
+  });
 
-//   store.dispatch(setGroupCallActive(true));
-//   store.dispatch(setCallState(callStates.CALL_IN_PROGRESS));
-// }
-// ;
+  // store.dispatch(setGroupCallActive(true));
+  // store.dispatch(setCallState(callStates.CALL_IN_PROGRESS));
+}
+;
 
 // export const joinGroupCall = (hostSocketId, roomId) => {
 //   const localStream = store.getState().call.localStream;
