@@ -99,6 +99,11 @@ const broadcastEventEvents = (data) => {
       );
       store.dispatch(dashboardActions.setActiveUsers(activeUsers));
       break;
+    case broadcastEventTypes.GROUP_CALL_ROOMS:
+      const groupCallRooms = data.groupCallRooms.filter(
+        (room) => room.socketId !== socket.id
+      );
+      store.dispatch(dashboardActions.setGroupCalls(data.groupCallRooms));
     default:
       break;
   }

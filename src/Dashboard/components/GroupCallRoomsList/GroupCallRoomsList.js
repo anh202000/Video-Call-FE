@@ -5,20 +5,11 @@ import './GroupCallRoomsList.css';
 
 const GroupCallRoomsList = (props) => {
   const { groupCallRooms } = props;
+  console.log(groupCallRooms, 'groupCallRooms')
 
-  const dumyList = [
-    {
-    roomId: '123123',
-    hostName: '123123',
-  },
-  {
-    roomId: '123123qweqwe',
-    hostName: '123123 asdasd',
-  }
-]
   return (
     <>
-      {dumyList.map(room => <GroupCallRoomsListItem key={room.roomId} room={room} />)}
+      {groupCallRooms.map(room => <GroupCallRoomsListItem key={room.roomId} room={room} />)}
     </>
   );
 };
