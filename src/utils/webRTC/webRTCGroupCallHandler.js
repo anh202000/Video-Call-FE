@@ -1,5 +1,6 @@
 import * as wss from '../wssConnection/wssConnection';
 import store from '../../store/store';
+import { callStates, setCallState, setGroupCallActive } from '../../store/actions/callActions';
 // import { setGroupCallActive, setCallState, callStates, setGroupCallIncomingStreams, clearGroupCallData } from '../../store/actions/callActions';
 // import { getTurnServers } from './TURN';
 
@@ -45,8 +46,8 @@ export const createNewGroupCall = (props) => {
     password: props?.roomName,
   });
 
-  // store.dispatch(setGroupCallActive(true));
-  // store.dispatch(setCallState(callStates.CALL_IN_PROGRESS));
+  store.dispatch(setGroupCallActive(true));
+  store.dispatch(setCallState(callStates.CALL_IN_PROGRESS));
 }
 ;
 

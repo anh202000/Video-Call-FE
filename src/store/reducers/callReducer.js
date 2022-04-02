@@ -13,6 +13,7 @@ const initState = {
   localCameraEnabled: true,
   localMicrophoneEnabled: true,
   screenSharingActive: false,
+  groupCallActive: false,
 };
 
 const callReducer = (state = initState, action) => {
@@ -71,6 +72,11 @@ const callReducer = (state = initState, action) => {
         localMicrophoneEnabled: true,
         localCameraEnabled: true,
         callingDialogVisible: false
+      };
+    case callActions.CALL_SET_GROUP_CALL_ACTIVE:
+      return {
+        ...state,
+        groupCallActive: action.active
       };
     default:
       return state;
