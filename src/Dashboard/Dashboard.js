@@ -9,6 +9,7 @@ import { callStates } from "../store/actions/callActions";
 import DashboardInformation from "./components/DashboardInformation/DashboardInformation";
 import { connect } from "react-redux";
 import GroupCallRoomsList from "./components/GroupCallRoomsList/GroupCallRoomsList";
+import GroupCall from "./components/GroupCall/GroupCall";
 
 const Dashboard = ({ username, callState }) => {
   useEffect(() => {
@@ -20,6 +21,7 @@ const Dashboard = ({ username, callState }) => {
       <div className="dashboard_left_section">
         <div className="dashboard_content_container">
           <DirectCall />
+          <GroupCall />
           {callState !== callStates.CALL_IN_PROGRESS && (
             <DashboardInformation username={username} />
           )}
