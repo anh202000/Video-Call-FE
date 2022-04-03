@@ -11,7 +11,8 @@ import { connect } from "react-redux";
 import GroupCallRoomsList from "./components/GroupCallRoomsList/GroupCallRoomsList";
 import GroupCall from "./components/GroupCall/GroupCall";
 
-const Dashboard = ({ username, callState }) => {
+const Dashboard = ({ username, callState }, props) => {
+  console.log(username, 'username')
   useEffect(() => {
     webRTCHandler.getLocalStream();
     webRTCGroupHandler.connectWithMyPeer();

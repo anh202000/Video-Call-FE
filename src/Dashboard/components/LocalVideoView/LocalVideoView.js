@@ -44,7 +44,7 @@ const LocalVideoView = (props) => {
 
   return (
     <div className="background_secondary_color" style={styles.videoContainer}>
-      <video style={styles.videoElement} ref={localVideoRef} autoPlay muted onClick={() => alert('123')}></video>
+      <video style={styles.videoElement} ref={localVideoRef} autoPlay onClick={() => alert('123')}></video>
 
       <When condition={callState !== callStates.CALL_IN_PROGRESS}>
         <When condition={checked}>
@@ -52,7 +52,7 @@ const LocalVideoView = (props) => {
         </When>
 
         <label className="switch">
-          <input type="checkbox" checked={checked} onChange={toggle} />
+          <input type="checkbox" checked={checked} onChange ={toggle} />
           <span className="slider round"></span>
         </label>
       </When>

@@ -60,9 +60,9 @@ const ConversationButtons = (props) => {
       <ConversationButton onClickHandler={handleCameraButtonPressed}>
         {localCameraEnabled ? <MdVideocam style={styles.icon} /> : <MdVideocamOff style={styles.icon} />}
       </ConversationButton>
-      <ConversationButton onClickHandler={handleScreenSharingButtonPressed}>
+      {!groupCall && <ConversationButton onClickHandler={handleScreenSharingButtonPressed}>
         {screenSharingActive ? <MdCamera style={styles.icon} /> : <MdVideoLabel style={styles.icon} />}
-      </ConversationButton>
+      </ConversationButton>}
     </div>
   );
 };

@@ -1,0 +1,138 @@
+
+.modal {
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    z-index: 999;
+    transition: opacity 500ms;
+    box-shadow: 0 20px 25px rgba(0,0,0,0.35);
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 10px;
+    width: 30%;
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .text {
+    color: black;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .roomNmLabel, .roomPassLabel {
+    color: black;
+    font-size: 18px;
+  }
+
+  .showPass {
+    color: black;
+    font-size: 14px;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .cancelbtn, .submitbtn {
+    width: 20%;
+  }
+
+  .cancelbtn {
+    background-color: #D3D3D3;
+    border: 2px solid #D3D3D3;
+    border-radius: 2px;
+    color: black;
+    padding: 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 2px 12px;
+    cursor: pointer;
+  }
+
+  .submitbtn {
+    background-color: #6495ED;
+    border: 2px solid #6495ED;
+    border-radius: 2px;
+    color: white;
+    padding: 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 2px 2px;
+    cursor: pointer;
+  }
+
+  .div-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 4rem;
+  }
+
+  .submitbtn:hover {
+    opacity: 0.5;
+    color: white;
+  }
+
+  .cancelbtn:hover {
+    opacity: 0.5;
+    color: black;
+  }
+  
+  input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid rgb(204, 204, 204);
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #000;
+  }
+
+  input[type=password], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid rgb(204, 204, 204);
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #000;
+  }
+
+  input[type=checkbox], select {
+    width: 2rem;
+    display: inline-block;
+    border: 1px solid rgb(204, 204, 204);
+    border-radius: 4px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    color: #000;
+  }
