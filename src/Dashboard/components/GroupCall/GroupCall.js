@@ -28,7 +28,7 @@ const GroupCall = (props) => {
       </When>
       {!groupCallActive && localStream && callState !== callStates.CALL_IN_PROGRESS &&
         <GroupCallButton onClickHandler={onClickShowRoom} label='Create room' />}
-      {groupCallActive && <GroupCallRoom {...props} />}
+      {groupCallActive && <GroupCallRoom {...props} leaveRoom={leaveRoom}/>}
       {groupCallActive && <GroupCallButton onClickHandler={leaveRoom} label='Leave room' />}
     </>
   );

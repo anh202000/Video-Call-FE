@@ -127,11 +127,11 @@ const addVideoStream = (incomingStream) => {
 };
 
 // // if group call is active return roomId if not return false
-// export const checkActiveGroupCall = () => {
-//   if (store.getState().call.groupCallActive) {
-//     return groupCallRoomId;
-//   } else {
-//     return false;
-//   }
-// }
-// ;
+export const checkActiveGroupCall = () => {
+  if (store.getState().call.groupCallActive) {
+    return groupCallRoomId;
+  } else {
+    return false;
+  }
+}
+;

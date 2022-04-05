@@ -26,7 +26,8 @@ const ConversationButtons = (props) => {
     setCameraEnabled,
     setMicrophoneEnabled,
     screenSharingActive,
-    groupCall
+    groupCall,
+    leaveRoom
   } = props;
 
   const handleMicButtonPressed = () => {
@@ -54,15 +55,15 @@ const ConversationButtons = (props) => {
       <ConversationButton onClickHandler={handleMicButtonPressed}>
         {localMicrophoneEnabled ? <MdMic style={styles.icon} /> : <MdMicOff style={styles.icon} />}
       </ConversationButton>
-      {!groupCall && <ConversationButton onClickHandler={handleHangUpButtonPressed}>
+      <ConversationButton onClickHandler={groupCall ? leaveRoom : handleHangUpButtonPressed}>
         <MdCallEnd style={styles.icon} />
-      </ConversationButton>}
+      </ConversationButton>
       <ConversationButton onClickHandler={handleCameraButtonPressed}>
         {localCameraEnabled ? <MdVideocam style={styles.icon} /> : <MdVideocamOff style={styles.icon} />}
       </ConversationButton>
-      {!groupCall && <ConversationButton onClickHandler={handleScreenSharingButtonPressed}>
+      <ConversationButton onClickHandler={handleScreenSharingButtonPressed}>
         {screenSharingActive ? <MdCamera style={styles.icon} /> : <MdVideoLabel style={styles.icon} />}
-      </ConversationButton>}
+      </ConversationButton>
     </div>
   );
 };

@@ -5,7 +5,9 @@ import './GroupCallRoom.css';
 import GroupCallVideo from './GroupCallVideo';
 
 const GroupCallRoom = (props) => {
-  const { groupCallStreams, groupCallRooms, username } = props;
+  const { groupCallStreams, groupCallRooms, username, leaveRoom } = props;
+
+  console.log(groupCallStreams, 'groupCallStreams')
 
   const dataGr = groupCallRooms?.filter((item) => item.hostName === username)
   console.log(props, 'props')
@@ -15,11 +17,11 @@ const GroupCallRoom = (props) => {
       <div className='group_call_videos_container'>
         {
           groupCallStreams.map(stream => {
-            return <GroupCallVideo key={stream.id} stream={stream} />;
+            return <GroupCallVideo key={stream.id} stream={stream} username={username}/>;
           })
         }
       </div>
-      <ConversationButtons {...props} groupCall />
+      <ConversationButtons {...props} groupCall leaveRoom={leaveRoom}/>
     </div>
   );
 };

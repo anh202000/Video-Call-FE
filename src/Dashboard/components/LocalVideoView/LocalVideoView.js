@@ -23,6 +23,7 @@ const styles = {
 
 const LocalVideoView = (props) => {
   const { localStream, remoteStream, callState } = props;
+  console.log(props, 'props')
   const localVideoRef = useRef();
 
   const [checked, setChecked] = useState(true)
