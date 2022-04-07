@@ -10,6 +10,7 @@ import ConversationButtons from "../ConversationButtons/ConversationButtons";
 
 const DirectCall = (props) => {
   const { localStream, remoteStream, callState, callerUserName, callingDialogVisible, callRejected, hideCallRejectedDialog } = props;
+  console.log(props, 'props props')
   return (
     <>
       <LocalVideoView localStream={localStream} {...props}/>

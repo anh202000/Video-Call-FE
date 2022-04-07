@@ -12,7 +12,7 @@ const styles = {
     width: '40px',
     height: '40px',
     borderRadius: '40px',
-    border: '2px solid #e6e5e8',
+    border: '2px solid #DCDCDC',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center'
@@ -27,11 +27,12 @@ const CallingDialog = () => {
   const LoadingType = 'bubbles'
 
   return (
-    <div className='direct_calling_dialog background_secondary_color'>
-      <span>Calling</span>
-      <ReactLoading type={LoadingType} color="#fff" delay='20' height={'2rem'}/>
+    <div className='direct_calling_dialog background_calling_color'>
+      <span style={{color:'black', fontSize:'18px', marginBottom:'3rem'}}>Calling</span>
+      <h3 class="blink"></h3>
+      <ReactLoading type={LoadingType} color="#87CEFA" delay='20' height={'3rem'}/>
       <div style={styles.buttonContainer} onClick={handleHangUpButtonPressed}>
-        <MdCallEnd style={{ width: '20px', height: '20px', fill: '#e6e5e8' }} />
+        <MdCallEnd style={{ width: '22px', height: '22px', fill: '#DC143C' }} />
       </div>
     </div>
   );

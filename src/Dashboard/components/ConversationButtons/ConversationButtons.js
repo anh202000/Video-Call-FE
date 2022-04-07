@@ -1,7 +1,10 @@
-import React from 'react';
-import { MdCallEnd, MdMic, MdMicOff, MdVideocam, MdVideocamOff, MdVideoLabel, MdCamera } from 'react-icons/md';
+import React, { useState } from 'react';
+import { MdCallEnd, MdMic, MdMicOff, MdVideocam, MdVideocamOff, MdVideoLabel, MdCamera, MdViewList } from 'react-icons/md';
 import { hangUp, switchForScreenSharingStream } from '../../../utils/webRTC/webRTCHandler';
 import ConversationButton from './ConversationButton';
+import { When } from 'react-if'
+import './styled.css'
+import WhiteBoard from '../WhiteBoard/whiteboard';
 // import { switchForScreenSharingStream, hangUp } from '../../../utils/webRTC/webRTCHandler';
 
 const styles = {
@@ -30,6 +33,14 @@ const ConversationButtons = (props) => {
     leaveRoom
   } = props;
 
+  const [showContextMenu, setShowContextmenu] = useState(false)
+  const [showWhiteBoard, setshowWhiteBoard] = useState(false)
+  const onClickContextMenu = () => setShowContextmenu(!showContextMenu)
+  const onClickWhiteBoard = () => {
+  setshowWhiteBoard(!showWhiteBoard)
+  onClickContextMenu()
+  }
+
   const handleMicButtonPressed = () => {
     const micEnabled = localMicrophoneEnabled;
     localStream.getAudioTracks()[0].enabled = !micEnabled;
@@ -50,6 +61,19 @@ const ConversationButtons = (props) => {
     hangUp();
   };
 
+  var elem = document.getElementById("dashboard_content_container");
+
+  const onClickFullScreen = () => {
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.webkitRequestFullscreen) { /* Safari */
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) { /* IE11 */
+        elem.msRequestFullscreen();
+      }
+      onClickContextMenu()
+  };
+
   return (
     <div style={styles.buttonContainer}>
       <ConversationButton onClickHandler={handleMicButtonPressed}>
@@ -64,6 +88,25 @@ const ConversationButtons = (props) => {
       <ConversationButton onClickHandler={handleScreenSharingButtonPressed}>
         {screenSharingActive ? <MdCamera style={styles.icon} /> : <MdVideoLabel style={styles.icon} />}
       </ConversationButton>
+      <ConversationButton onClickHandler={onClickContextMenu}>
+        <MdViewList style={styles.icon} />
+      </ConversationButton>
+
+      <When condition={showContextMenu}>
+        <div className='menu-context background_calling_color'>
+          <ul>
+            <li><a onClick={onClickFullScreen}>Full screen</a></li>
+            <li><a onClick={onClickWhiteBoard}>White board</a></li>
+            <li><a >Report</a></li>
+            <li><a >Contact</a></li>
+            <li><a >About</a></li>
+          </ul>
+        </div>
+      </When>
+
+      <When condition={showWhiteBoard}>
+        <WhiteBoard onClickWhiteBoard={onClickWhiteBoard}/>
+      </When>
     </div>
   );
 };

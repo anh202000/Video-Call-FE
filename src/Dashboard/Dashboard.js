@@ -20,7 +20,7 @@ const Dashboard = ({ username, callState }, props) => {
   return (
     <div className="dashboard_container background_main_color">
       <div className="dashboard_left_section">
-        <div className="dashboard_content_container">
+        <div className="dashboard_content_container" id="dashboard_content_container">
           <DirectCall />
           <GroupCall />
           {callState !== callStates.CALL_IN_PROGRESS && (

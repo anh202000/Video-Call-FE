@@ -5,9 +5,11 @@ import Avatar, { AvatarItem } from '@atlaskit/avatar';
 import Tooltip from '@atlaskit/tooltip';
 import { callToOtherUser } from "../../../utils/webRTC/webRTCHandler";
 import { callStates } from "../../../store/actions/callActions";
+import randomColor from "randomcolor";
 
 const ActiveUsersListItem = (props) => {
-
+    var color = randomColor()
+    console.log(color, 'color')
     const { activeUser, callState } = props
     console.log(props)
 
@@ -22,8 +24,13 @@ const ActiveUsersListItem = (props) => {
 
     return (
         <div className="active_user_list_item" onClick={handleListItemPressed}>
-            <div className="active_user_list_image_container">
-                <AvatarItem avatar={<Avatar presence="online" />} />
+            <div class="avatar" style={{background: color}}>
+                <div class="avatar__letters">
+                    {activeUser?.username && activeUser?.username?.slice(0,2).toUpperCase()}
+                </div>
+                <div class="online-indicator">
+                    <span class="blink"></span>
+                </div>
             </div>
             <div>
                 <Tooltip content={activeUser?.username ? username : 'Unknow'}>

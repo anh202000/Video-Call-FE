@@ -31,6 +31,10 @@ code {
   background-color: #282C34;
 }
 
+.background_calling_color {
+  background-color: #fefefe;
+}
+
 .text_main_color {
   color: #e6e5e8;
 }

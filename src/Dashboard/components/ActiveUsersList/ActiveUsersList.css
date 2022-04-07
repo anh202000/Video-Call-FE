@@ -1,36 +1,92 @@
 .active_user_list_container {
-    width: 100%;
-    height: 100%;
-  }
-  
-  .active_user_list_item {
-    width: 100%;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    transition: 0.3s;
-  }
-  
-  .active_user_list_item:hover {
-    background-color: #8a85ff;
-  }
-  
-  .active_user_list_image_container {
-    width: 60px;
-    margin-left: 40px;
-    margin-right: 40px;
-  }
-  
-  .active_user_list_text {
-    font-size: 24px;
-  }
+  width: 100%;
+  height: 100%;
+}
 
-  div.active_user_list_text {
-    overflow: hidden;
-    white-space: nowrap; 
-    text-overflow: "..."; 
-  }
-  
-  .active_user_list_image {
-    width: 100%;
-  }
+.active_user_list_item {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  transition: 0.3s;
+}
+
+.active_user_list_item:hover {
+  background-color: #8a85ff;
+}
+
+.active_user_list_image_container {
+  width: 60px;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.active_user_list_text {
+  font-size: 24px;
+}
+
+div.active_user_list_text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: "...";
+}
+
+.active_user_list_image {
+  width: 100%;
+}
+
+.avatar {
+  margin: 0 20px;
+  /* Center the content */
+  display: inline-block;
+  vertical-align: middle;
+  /* Used to position the content */
+  position: relative;
+  /* Colors */
+  /* background: lightblue; */
+  color: #fff;
+  /* Rounded border */
+  border-radius: 50%;
+  height: 48px;
+  width: 48px;
+}
+
+.avatar__letters {
+  /* Center the content */
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+div.online-indicator {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin-right: 10px;
+
+  background-color: #0fcc45;
+  border-radius: 50%;
+
+  position: absolute;
+  bottom: 2px;
+  right: -10px;
+}
+
+span.blink {
+  display: block;
+  width: 15px;
+  height: 15px;
+
+  background-color: #0fcc45;
+  opacity: 0.7;
+  border-radius: 50%;
+
+  animation: blink 1s linear infinite;
+}
+
+@keyframes blink {
+  100% { transform: scale(2, 2); 
+          opacity: 0;
+        }
+}

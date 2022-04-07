@@ -13,8 +13,8 @@ const CallRejectedDialog = ({ reason, hideCallRejectedDialog }) => {
   }, []);
 
   return (
-    <div className='call_rejected_dialog background_secondary_color'>
-      <span>
+    <div className='direct_calling_dialog background_calling_color'>
+      <span style={{ color: 'black', fontSize: '20px', marginBottom: '3rem' }}>
         {reason}
       </span>
     </div>
