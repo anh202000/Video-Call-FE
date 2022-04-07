@@ -33,7 +33,8 @@ const configuration = {
 }
 
 let connectedUserSocketId;
-let peerConnection
+let peerConnection;
+let dataChannel;
 
 export const getLocalStream = () => {
   navigator.mediaDevices
@@ -64,6 +65,26 @@ const createPeerConnection = () => {
     store.dispatch(setRemoteStream(stream));
   };
 
+  // incoming data channel messages
+  peerConnection.ondatachannel = (event) => {
+    const dataChannel = event.channel;
+
+    dataChannel.onopen = () => {
+      console.log('peer connection is ready to receive data channel messages');
+    };
+
+    dataChannel.onmessage = (event) => {
+      store.dispatch(setMessage(true, event.data));
+    };
+  };
+
+  dataChannel = peerConnection.createDataChannel('chat');
+
+  dataChannel.onopen = () => {
+    console.log('chat data channel succesfully opened');
+  };
+
+  // stun từ server
   peerConnection.onicecandidate = (event) => {
     console.log('geeting candidates from stun server');
     if (event.candidate) {
@@ -139,7 +160,7 @@ export const rejectIncomingCallRequest = () => {
 export const handlePreOfferAnswer = (data) => {
   console.log(data, 'data')
   store.dispatch(setCallingDialogVisible(false))
-  if(data.answer === preOfferAnswers.CALL_ACCEPTED) {
+  if (data.answer === preOfferAnswers.CALL_ACCEPTED) {
     sendOffer()
     console.log(data, 'data')
   } else {
@@ -147,7 +168,7 @@ export const handlePreOfferAnswer = (data) => {
     if (data.answer === preOfferAnswers.CALL_NOT_AVAILABLE) {
       rejectionReason = 'Callee is not able to pick up the call right now'
     } else {
-    rejectionReason = 'The callee is currently unreachable'
+      rejectionReason = 'The callee is currently unreachable'
     }
     store.dispatch(setCallRejected({
       rejected: true,
@@ -212,7 +233,7 @@ export const switchForScreenSharingStream = async () => {
     screenSharingStream.getTracks().forEach(track => track.stop());
   }
 }
-;
+  ;
 
 export const handleUserHangedUp = () => {
   resetCallDataAfterHangUp();
