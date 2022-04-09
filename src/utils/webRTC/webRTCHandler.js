@@ -6,6 +6,7 @@ import {
   setCallRejected,
   setCallState,
   setLocalStream,
+  setMessage,
   setRemoteStream,
   setScreenSharingActive,
 } from "../../store/actions/callActions";
@@ -270,3 +271,8 @@ export const resetCallData = () => {
   connectedUserSocketId = null;
   store.dispatch(setCallState(callStates.CALL_AVAILABLE));
 };
+
+export const sendMessageUsingDataChannel = (message, username) => {
+  dataChannel.send(message + `${'userName' + username}`);
+}
+;

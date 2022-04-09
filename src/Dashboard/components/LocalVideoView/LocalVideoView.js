@@ -7,8 +7,8 @@ import { callStates } from "../../../store/actions/callActions";
 const styles = {
   videoContainer: {
     display: "flex",
-    width: "12.37rem",
-    height: "13.375rem",
+    width: "20.37rem",
+    height: "21.375rem",
     borderRadius: "0.5rem",
     position: "absolute",
     top: "5%",
