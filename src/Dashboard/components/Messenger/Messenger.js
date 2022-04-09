@@ -1,25 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { sendMessageUsingDataChannel } from '../../../utils/webRTC/webRTCHandler';
-import MessageDisplayer from './MessageDisplayer';
 import 'emoji-mart/css/emoji-mart.css'
-import { Picker } from 'emoji-mart'
-import { MdEmojiEmotions } from 'react-icons/md';
+import { MdOutlineMessage } from 'react-icons/md';
 import { When } from 'react-if'
 
 import './Messenger.css';
+import ChatForm from './chatform/chatform';
 
 const styles = {
   icon: {
-    width: '25px',
-    height: '25px',
-    fill: '#87CEFA',
+    width: '30px',
+    height: '26px',
+    fill: '#FFFAF0',
     position: 'absolute',
     bottom: '21.5%',
     right: '21%'
   }
 };
 
-const Messenger = ({ message, setDirectCallMessage, username }) => {
+const Messenger = ({ message, setDirectCallMessage, username, onClickShowRightList, showRightList, callerUserName }) => {
   const [inputValue, setInputValue] = useState('');
   const [emoji, setEmoji] = useState(false);
 
@@ -38,35 +37,22 @@ const Messenger = ({ message, setDirectCallMessage, username }) => {
     }
   }, [message.received]);
 
-   const onClickEmoji = (event) => {
+  const onClickEmoji = (event) => {
     setInputValue(inputValue ? inputValue + event.native : event.native)
-   }
+  }
 
-   const onClickShowEmoji = () => {
+  const onClickShowEmoji = () => {
     setEmoji(!emoji)
-   }
+  }
 
   return (
     <div>
-    <When condition={emoji}>
-      <Picker 
-      style={{ position: 'absolute', bottom: '26%', right: '3%', zIndex: '999', width: '18rem', height: '24rem'}} 
-      onSelect={onClickEmoji}
-      showPreview={false}
-      showSkinTones={false}
-      />
-    </When>
-      
-      <input
-        className='messages_input'
-        type='123'
-        value={inputValue}
-        onChange={(e) => { setInputValue(e.target.value); }}
-        onKeyDown={handleOnKeyDownEvent}
-        placeholder='Type your message'
-      />
-      <MdEmojiEmotions style={styles.icon} onClick={onClickShowEmoji}/>
-      {message.received && <MessageDisplayer message={message.content} />}
+      <div class="icon">
+        <MdOutlineMessage style={styles.icon} onClick={onClickShowRightList} />
+      </div>
+      <When condition={showRightList !== true}>
+        <ChatForm message={message} setDirectCallMessage={setDirectCallMessage} username={username} callerUserName={callerUserName} />
+      </When>
     </div>
   );
 };

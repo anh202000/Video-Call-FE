@@ -10,8 +10,8 @@ import ConversationButtons from "../ConversationButtons/ConversationButtons";
 import Messenger from '../Messenger/Messenger';
 
 const DirectCall = (props) => {
-  const { localStream, remoteStream, callState, callerUserName, callingDialogVisible, callRejected, hideCallRejectedDialog, setDirectCallMessage, message, username } = props;
-  console.log(props, 'props props')
+  const { localStream, remoteStream, callState, callerUserName, callingDialogVisible, callRejected, hideCallRejectedDialog, setDirectCallMessage, message, username, onClickShowRightList, showRightList } = props;
+  console.log(props?.callerUserName, 'props props 123')
   return (
     <>
       <LocalVideoView localStream={localStream} {...props}/>
@@ -20,7 +20,7 @@ const DirectCall = (props) => {
       {callState === callStates.CALL_REQUESTED && <IncomingCallDialog callerUserName={callerUserName}/>}
       {callingDialogVisible && <CallingDialog/>}
       {remoteStream && callState === callStates.CALL_IN_PROGRESS && <ConversationButtons {...props} />}
-      {remoteStream && callState === callStates.CALL_IN_PROGRESS && <Messenger message={message} setDirectCallMessage={setDirectCallMessage} username={username}/>}
+      {remoteStream && callState === callStates.CALL_IN_PROGRESS && <Messenger showRightList={showRightList} onClickShowRightList={onClickShowRightList} message={message} setDirectCallMessage={setDirectCallMessage} username={username} callerUserName={callerUserName}/>}
     </>
   );
 };
