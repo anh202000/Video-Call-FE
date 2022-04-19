@@ -23,8 +23,16 @@ code {
   background-color: #8a85ff;
 }
 
+.background_main_color_room {
+  background-color: #778899;
+}
+
 .background_secondary_color {
   background-color: #282C34;
+}
+
+.background_calling_color {
+  background-color: #fefefe;
 }
 
 .text_main_color {

@@ -75,18 +75,18 @@
 
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-  color: #e6e5e8;
-  text-align: center;
+  /* color: #e6e5e8; */
+  /* text-align: center; */
 }
 ::-moz-placeholder { /* Firefox 19+ */
-  color: #e6e5e8;
-  text-align: center;
+  /* color: #e6e5e8; */
+  /* text-align: center; */
 }
 :-ms-input-placeholder { /* IE 10+ */
-  color: #e6e5e8;
+  /* color: #e6e5e8; */
   text-align: center;
 }
 :-moz-placeholder { /* Firefox 18- */
-  color: #e6e5e8;
-  text-align: center;
+  /* color: #e6e5e8; */
+  /* text-align: center; */
 }

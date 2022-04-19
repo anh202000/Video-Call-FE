@@ -3,19 +3,21 @@ import { connect } from "react-redux";
 import './ActiveUsersList.css';
 import ActiveUsersListItem from './ActiveUsersListItem.js'
 
-const ActiveUsersList = ({activeUsers}) => {
-console.log(activeUsers,'activeUsers')
+const ActiveUsersList = (props) => {
+const {activeUsers, callState } = props
+
     return (
         <div className="active_user_list_container">
             {
-                activeUsers?.map((activeUser) => <ActiveUsersListItem key={activeUser.socketId} activeUser={activeUser} />)
+                activeUsers?.map((activeUser) => <ActiveUsersListItem key={activeUser.socketId} activeUser={activeUser} callState={callState}/>)
             }
         </div>
     );
 };
 
-const mapStateToProps = ({ dashboard }) => ({
-    ...dashboard
+const mapStateToProps = ({ dashboard, call }) => ({
+    ...dashboard,
+    ...call
   });
   
   export default connect(mapStateToProps)(ActiveUsersList);

@@ -8,6 +8,8 @@ import {
 } from 'react-router-dom'
 import Dashboard from './Dashboard/Dashboard';
 import LoginPage from './LoginPage/LoginPage';
+import LoginPageNew from './authPages/LoginPage/LoginPageNew';
+import RegisterPage from './authPages/RegisterPage/RegisterPage';
 
 function App() {
 
@@ -18,11 +20,17 @@ function App() {
   return (
     <Router>
       <Switch>
+        <Route exact path="/login">
+          <LoginPageNew />
+        </Route>
+        <Route exact path="/register">
+            <RegisterPage />
+          </Route>
         <Route path='/dashboard'>
-          <Dashboard/>
+          <Dashboard />
         </Route>
         <Route path='/'>
-          <LoginPage/>
+          <LoginPage />
         </Route>
       </Switch>
     </Router>

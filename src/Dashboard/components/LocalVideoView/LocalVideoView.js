@@ -1,13 +1,19 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import ConversationViewers from "../ConvertionViewer/ConversationViewers";
+import './styled.css'
+import { When } from 'react-if'
+import { callStates } from "../../../store/actions/callActions";
 
 const styles = {
   videoContainer: {
-    width: "9.37rem",
-    height: "9.375rem",
+    display: "flex",
+    width: "20.37rem",
+    height: "21.375rem",
     borderRadius: "0.5rem",
     position: "absolute",
     top: "5%",
     right: "23%",
+    zindex: "-1",
   },
   videoElement: {
     width: "100%",
@@ -16,8 +22,15 @@ const styles = {
 };
 
 const LocalVideoView = (props) => {
-  const { localStream } = props;
+  const { localStream, remoteStream, callState } = props;
+  console.log(props, 'props')
   const localVideoRef = useRef();
+
+  const [checked, setChecked] = useState(true)
+
+  const toggle = () => {
+    setChecked(!checked)
+  }
 
   useEffect(() => {
     if (localStream) {
@@ -32,8 +45,21 @@ const LocalVideoView = (props) => {
 
   return (
     <div className="background_secondary_color" style={styles.videoContainer}>
-      <video style={styles.videoElement} ref={localVideoRef} autoPlay muted></video>
+      <video style={styles.videoElement} ref={localVideoRef} autoPlay onClick={() => alert('123')}></video>
+
+      <When condition={callState !== callStates.CALL_IN_PROGRESS}>
+        <When condition={checked}>
+          <ConversationViewers {...props} />
+        </When>
+
+        <label className="switch">
+          <input type="checkbox" checked={checked} onChange ={toggle} />
+          <span className="slider round"></span>
+        </label>
+      </When>
+
     </div>
+
   );
 };
 

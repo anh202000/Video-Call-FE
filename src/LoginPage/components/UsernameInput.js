@@ -8,7 +8,7 @@ import SuccessIcon from "@atlaskit/icon/glyph/check-circle";
 import { G400 } from "@atlaskit/theme/colors";
 import Flag from "@atlaskit/flag";
 
-const UsernameInput = (props : any) => {
+const UsernameInput = (props) => {
   const { username, setUsername } = props;
   const [hide, setHide] = useState();
 
@@ -27,7 +27,6 @@ const UsernameInput = (props : any) => {
   const CheckFlagValidate =
     username.length > 0 ? initialName.test(username) : "";
 
-  console.log(hide, "hide");
   useEffect(() => {
     setHide("");
   }, [username]);
