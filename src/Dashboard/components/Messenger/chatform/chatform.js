@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Picker } from 'emoji-mart';
+import { Emoji, Picker } from 'emoji-mart';
 import randomColor from 'randomcolor';
 import './styled.css'
 import { When } from 'react-if'
-import { MdEmojiEmotions } from 'react-icons/md';
+import { MdEmojiEmotions, MdImage, MdThumbUp } from 'react-icons/md';
 import { io } from 'socket.io-client';
 import moment from 'moment'
 
@@ -33,8 +33,11 @@ const ChatForm = ({ username, callerUserName }) => {
     const [chat, setChat] = useState([])
     const [emoji, setEmoji] = useState(false);
     const [color, setColor] = useState("");
+    const [file, setFile] = useState();
 
     const socketRef = useRef()
+    const inputFile = useRef(null) 
+    const bottomRef = useRef() 
 
     useEffect(() => {
         const checkrender = randomColor()
@@ -62,6 +65,20 @@ const ChatForm = ({ username, callerUserName }) => {
         setState({ message: state?.message ? state?.message + event.native : event.native, name: username, timeSend: getMoment })
     }
 
+    const onCLickSendLike = (event) => {
+
+    }
+
+    const onClickImage = () => {
+        // `current` points to the mounted file input element
+       inputFile.current.click();
+      };
+
+    const takeImage = (event) => {
+        setState({ message: event.target.files[0].name, name: username, timeSend: getMoment, roomId: [callerUserName, username] })
+        setFile(event.target.files[0])
+    }
+
     const onClickShowEmoji = () => {
         setEmoji(!emoji)
     }
@@ -76,9 +93,19 @@ const ChatForm = ({ username, callerUserName }) => {
         setState({ message: "", name, timeSend, roomId })
     }
 
+    const scrollBottom = () => {
+        bottomRef.current.scrollIntoView({ behavior: "smooth" })
+    }
+
+    useEffect(() => {
+        if(chat?.length) {
+            scrollBottom()
+        }
+    }, [chat])
+
     console.log(chat, 'chat')
     return (
-        <div className='chat_form background_secondary_color'>
+        <div className='chat_form background_secondary_color' ref={bottomRef}>
             <When condition={emoji}>
                 <Picker
                     style={styles.emoji}
@@ -105,6 +132,7 @@ const ChatForm = ({ username, callerUserName }) => {
                                 </div>
                             </When>
                             <div class="chat-messages">
+                                <div class="from">{item?.name !== username ? item?.name : 'You'}</div>
                                 <div class="message">{item?.message}</div>
                                 <div class="from">{item?.timeSend}</div>
                             </div>
@@ -116,13 +144,16 @@ const ChatForm = ({ username, callerUserName }) => {
 
             <input
                 className='messages_input'
-                type='123'
+                type=''
                 value={state.message}
                 onChange={(e) => onTextChange(e)}
                 onKeyDown={handleOnKeyDownEvent}
-                placeholder='Type your message'
+                placeholder='...'
             />
-            <MdEmojiEmotions onClick={onClickShowEmoji} className='emoji'/>
+            <input type='file' id='file' ref={inputFile} style={{display: 'none'}} onChange={takeImage}/>
+            <MdThumbUp onClick={onCLickSendLike} className='like' />
+            <MdEmojiEmotions onClick={onClickShowEmoji} className='emoji' />
+            <MdImage onClick={onClickImage} className='image' />
         </div>
     )
 }

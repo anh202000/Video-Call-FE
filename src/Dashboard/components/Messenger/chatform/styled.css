@@ -50,7 +50,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow: scroll;
+  overflow: auto;
 }
 
 /* width */
@@ -135,27 +135,49 @@ span.blink {
 
 .messages_input {
   height: 4rem;
-  width: 18.15%;
+  width: 18.45%;
   padding: 0 5px;
-  border: 1px solid #1E90FF;
-  background-color: #1E90FF;
+  border: 1px solid #797a7b;
+  background-color: #000000;
   border-style: inset;
   position: fixed;
   margin: 0;
-  bottom: 22%;
+  bottom: 20%;
   font-size: 14px;
   color: #ffffff;
 }
 
-.emoji {
+.like {
   height: 4rem;
-  width: 2%;
+  width: 1.5%;
   padding: 0 5px;
   position: fixed;
   margin: 0;
-  bottom: 22%;
-  color: #ffffff;
+  bottom: 20%;
+  color: rgb(0, 132, 255);
   right: 1%;
+}
+
+.emoji {
+  height: 4rem;
+  width: 1.5%;
+  padding: 0 5px;
+  position: fixed;
+  margin: 0;
+  bottom: 20%;
+  color: rgb(0, 132, 255);
+  right: 3%;
+}
+
+.image {
+  height: 4rem;
+  width: 1.5%;
+  padding: 0 5px;
+  position: fixed;
+  margin: 0;
+  bottom: 20%;
+  color: rgb(0, 132, 255);
+  right: 5%;
 }
 
 
@@ -288,6 +310,7 @@ span.blink {
   border-bottom-right-radius: 18px;
   border-top-left-radius: 18px;
   color: #050505;
+  word-break: break-word;
 }
 .chat-messages .from{
   float: left;
@@ -295,6 +318,7 @@ span.blink {
   width: 100%;
   text-align: left;
   font-size: 11px;
+
 }
 .chat-thumb {
   border-radius: 40px;
