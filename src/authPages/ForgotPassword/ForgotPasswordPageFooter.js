@@ -5,22 +5,18 @@ import CustomPrimaryButton from "../../utils/sharedCustom/CustomPrimaryButton";
 import RedirectInfo from "../../utils/sharedCustom/RedirectInfo";
 
 const getFormNotValidMessage = () => {
-  return "Enter correct e-mail address and password should contains between 6 and 12 characters";
+  return "Username should contains between 3 and 12 characters and password should contains between 6 and 12 character. Also correct e-mail address should provided";
 };
 
 const getFormValidMessage = () => {
-  return "Press to log in!";
+  return "Press to register!";
 };
 
-const LoginPageFooter = ({ handleLogin, isFormValid }) => {
+const ForgotPassworkPageFooter = ({ handleRegister, isFormValid }) => {
   const history = useHistory();
 
-  const handlePushToRegisterPage = () => {
-    history.push("/register");
-  };
-
-  const handlePushToForgotPage = () => {
-    history.push("/forgot-password");
+  const handlePushToLoginPage = () => {
+    history.push("/login");
   };
 
   return (
@@ -30,27 +26,21 @@ const LoginPageFooter = ({ handleLogin, isFormValid }) => {
       >
         <div>
           <CustomPrimaryButton
-            label="Log in"
+            label="Submit"
             additionalStyles={{ marginTop: "30px" }}
             disabled={!isFormValid}
-            onClick={handleLogin}
+            onClick={handleRegister}
           />
         </div>
       </Tooltip>
       <RedirectInfo
-        text="Need an account? "
-        redirectText="Create an account"
+        text=""
+        redirectText="Already have an account ?"
         additionalStyles={{ marginTop: "5px" }}
-        redirectHandler={handlePushToRegisterPage}
-      />
-      <RedirectInfo
-        text="or "
-        redirectText="Forgot Password"
-        additionalStyles={{ marginTop: "5px" }}
-        redirectHandler={handlePushToForgotPage}
+        redirectHandler={handlePushToLoginPage}
       />
     </>
   );
 };
 
-export default LoginPageFooter;
+export default ForgotPassworkPageFooter;

@@ -10,6 +10,7 @@ import Dashboard from './Dashboard/Dashboard';
 import LoginPage from './LoginPage/LoginPage';
 import LoginPageNew from './authPages/LoginPage/LoginPageNew';
 import RegisterPage from './authPages/RegisterPage/RegisterPage';
+import ForgotPassworkPage from './authPages/ForgotPassword/ForgotPassword';
 
 function App() {
 
@@ -20,6 +21,9 @@ function App() {
   return (
     <Router>
       <Switch>
+        <Route exact path="/forgot-password">
+          <ForgotPassworkPage />
+        </Route>
         <Route exact path="/login">
           <LoginPageNew />
         </Route>
