@@ -19,10 +19,10 @@
 
 .container_chat img {
   float: left;
-  max-width: 60px;
-  width: 100%;
-  margin-right: 20px;
-  border-radius: 50%;
+  /* max-width: 60px; */
+  width: 10rem;
+  /* margin-right: 20px; */
+  /* border-radius: 50%; */
 }
 
 .container_chat img.right {
@@ -77,6 +77,12 @@
   background: rgb(85, 120, 179);
 }
 
+.closeImage:hover {
+  color: rgb(253, 253, 253);
+  background-color: #000000;
+  border-radius: 25px;
+}
+
 .avatar_form {
   /* Center the content */
   display: inline-block;
@@ -112,6 +118,13 @@ div.online-indicator {
   position: absolute;
   bottom: 2px;
   right: -10px;
+}
+
+.closeImage {
+  position: absolute;
+  color: #070707;
+  right: 4%;
+  padding-top: 2px;
 }
 
 span.blink {
@@ -296,6 +309,7 @@ span.blink {
   float: left;
   width: 80%;
   margin-bottom: 20px;
+  display: block;
 }
 .chat-message-group .message{
   float: left;

@@ -9,6 +9,11 @@ import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import AuthBox from "../../utils/sharedCustom/AuthBox";
 import { validateRegisterForm } from "../../utils/auth/validators";
+import axios from "axios";
+import { service } from "../../utils/service/api";
+import qs from "qs";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const RegisterPage = ({ register }) => {
   const history = useHistory();
@@ -16,17 +21,92 @@ const RegisterPage = ({ register }) => {
   const [mail, setMail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [userList, setUserList] = useState([]);
 
   const [isFormValid, setIsFormValid] = useState(false);
+  const checkdulicateMail = userList && userList?.filter((item) => item.mail === mail) || []
+  const checkdulicateUserName = userList && userList?.filter((item) => item?.username === username) || []
+
+  useEffect(() => {
+    axios.get(
+      service.loginapi,
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      }
+    )
+      .then((response) => {
+        if (response.status === 200) {
+          setUserList(response.data)
+        }
+      });
+
+  }, [])
 
   const handleRegister = () => {
-    const userDetails = {
-      mail,
-      password,
-      username,
-    };
+    if (checkdulicateMail?.length > 0) {
+      toast.error('Gmail already exists, please enter another Gmail!', {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+    if (checkdulicateUserName?.length > 0) {
+      toast.error('UserName already exists, please enter another UserName!', {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      axios.post(
+        service.loginapi,
+        qs.stringify({
+          mail,
+          password,
+          username,
+        }),
+        {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        }
+      )
+        .then((response) => {
+          if (response.status === 201) {
+            toast.success('Register accout success', {
+              position: "bottom-left",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+            setTimeout(
+              () => {
+                history.push("/login")
+              },
+              5000,
+            );
+          }
+        });
 
-    register(userDetails, history);
+      const userDetails = {
+        mail,
+        password,
+        username,
+      };
+      register(userDetails, history);
+    }
   };
 
   useEffect(() => {
@@ -41,6 +121,7 @@ const RegisterPage = ({ register }) => {
 
   return (
     <AuthBox>
+      <ToastContainer />
       <Typography variant="h5" sx={{ color: "white " }}>
         Create an account
       </Typography>

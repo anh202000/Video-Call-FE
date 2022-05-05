@@ -1,6 +1,7 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import { styled } from "@mui/system";
+import './styled.css' 
 
 const BoxWrapper = styled("div")({
   width: "100%",
@@ -8,16 +9,15 @@ const BoxWrapper = styled("div")({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  background: "#5865F2",
 });
 
 const AuthBox = (props) => {
   return (
-    <BoxWrapper>
+    <BoxWrapper className="boxs">
       <Box
         sx={{
           width: 700,
-          height: 460,
+          height: 640,
           bgcolor: "#36393f",
           borderRadius: "5px",
           boxShadow: "0 2px 10px 0 rgb(0 0 0 / 20%)",
