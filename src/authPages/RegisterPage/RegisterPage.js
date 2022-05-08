@@ -84,7 +84,7 @@ const RegisterPage = ({ register }) => {
           if (response.status === 201) {
             toast.success('Register accout success', {
               position: "bottom-left",
-              autoClose: 5000,
+              autoClose: 1000,
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: true,
@@ -95,7 +95,7 @@ const RegisterPage = ({ register }) => {
               () => {
                 history.push("/login")
               },
-              5000,
+              1000,
             );
           }
         });

@@ -5,14 +5,20 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  useHistory,
 } from 'react-router-dom'
 import Dashboard from './Dashboard/Dashboard';
-import LoginPage from './LoginPage/LoginPage';
+import LoginPage from './HomePage/HomePage';
 import LoginPageNew from './authPages/LoginPage/LoginPageNew';
 import RegisterPage from './authPages/RegisterPage/RegisterPage';
 import ForgotPassworkPage from './authPages/ForgotPassword/ForgotPassword';
+import axios from 'axios';
+import { service } from './utils/service/api';
+import AboutPage from './About/AboutPage';
+import Blog from './Blog/Blog';
 
 function App() {
+  const history = useHistory();
 
   useEffect(() => {
     connectWithWebSocket();
@@ -21,6 +27,9 @@ function App() {
   return (
     <Router>
       <Switch>
+        <Route exact path="/change-password">
+          <ForgotPassworkPage />
+        </Route>
         <Route exact path="/forgot-password">
           <ForgotPassworkPage />
         </Route>
@@ -32,6 +41,12 @@ function App() {
           </Route>
         <Route path='/dashboard'>
           <Dashboard />
+        </Route>
+        <Route path='/blog'>
+          <Blog />
+        </Route>
+        <Route path='/about'>
+          <AboutPage />
         </Route>
         <Route path='/'>
           <LoginPage />

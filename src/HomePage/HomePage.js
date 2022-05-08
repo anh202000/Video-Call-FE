@@ -6,13 +6,13 @@ import SubmitButton from "./components/SubmitButton";
 import { useHistory } from "react-router-dom";
 import { setUsername } from "../store/actions/dashboardActions";
 import { registerNewUser } from "../utils/wssConnection/wssConnection";
-import "./LoginPage.css";
+import "./HomePage.css";
 import axios from "axios";
 import { service } from "../utils/service/api";
 import { MdVideoCall } from "react-icons/md";
 import Header from "../utils/sharedCustom/HeaderBar/header";
 import randomColor from "randomcolor";
-const LoginPage = ({ saveUsername }) => {
+const HomePage = ({ saveUsername }) => {
   const [username, setUsername] = useState("");
   const [listUser, setListUser] = useState([]);
 
@@ -179,4 +179,4 @@ const mapActionsToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapActionsToProps)(LoginPage);
+export default connect(null, mapActionsToProps)(HomePage);

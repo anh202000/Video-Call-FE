@@ -57,7 +57,7 @@ const ForgotPassworkPage = ({ register }) => {
         if (response.status === 200) {
           toast.success('Register accout success', {
             position: "bottom-left",
-            autoClose: 5000,
+            autoClose: 1000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -68,7 +68,7 @@ const ForgotPassworkPage = ({ register }) => {
             () => {
               history.push("/login")
             },
-            5000,
+            1000,
           );
         }
       });

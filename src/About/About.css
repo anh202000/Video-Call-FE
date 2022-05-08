@@ -176,6 +176,19 @@
   text-decoration: none;
   color: #00796b;
 }
+.form-map {
+  border: 1px solid #eee;
+  padding: 30px;
+  width: 100%;
+  max-width: 700px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.302), 0 2px 6px 2px rgba(60, 64, 67, 0.149);
+}
+.form-map {
+  width: 100%;
+  border-radius: 5px;
+}
 .home-page .body .right-side .content {
   border: 1px solid #eee;
   padding: 30px;
@@ -305,5 +318,187 @@
   100% {left:0;}
 }
 
+#robot {
+  position: relative;
+  height: 78vh;
+  width: 20vh;
+  margin: 0 auto;
+  animation: robot 0.7s infinite ease-in-out;
+  z-index: 2;
+}
+#robot div {
+  position: absolute;
+  transform-origin: 50% 0;
+}
+#robot .r div {
+  background: #29516d;
+}
+#robot .l div {
+  background: #326384;
+}
+#robot .leg.r, #robot .arm.l {
+  animation: trans 0.7s 0.35s infinite linear;
+}
+#robot .leg.l, #robot .arm.r {
+  animation: trans 0.7s infinite linear;
+}
+#robot .head {
+  top: 10vh;
+  left: 5vh;
+  width: 9vh;
+  height: 10vh;
+  margin: 0 auto;
+  transform-origin: 20% 80%;
+  animation: head 0.7s infinite linear;
+  background: #326384;
+}
+#robot .arm {
+  left: 5vh;
+  top: 20.5vh;
+  width: 8vh;
+  height: 5.5vh;
+}
+#robot .arm div {
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 8.5vh;
+  box-sizing: border-box;
+  transform: rotate(5deg);
+  animation: arms1 0.7s infinite linear;
+}
+#robot .arm div div {
+  animation: arms2 0.7s infinite linear;
+}
+#robot .arm.l div {
+  animation-delay: -0.35s;
+}
+#robot .leg {
+  top: 45vh;
+  left: 5vh;
+  width: 8vh;
+  height: 4vh;
+}
+#robot .leg div {
+  width: 100%;
+  height: 12vh;
+  top: 100%;
+  animation: legs1 0.7s infinite linear;
+}
+#robot .leg div div {
+  animation: legs2 0.7s infinite linear;
+}
+#robot .leg.r div {
+  animation-delay: -0.35s;
+}
+.shadow {
+  position: relative;
+  width: 22vh;
+  height: 3vh;
+  margin: 0 auto;
+  border-radius: 50%;
+  background: #05314f;
+  animation: shadow 0.7s infinite linear;
+  z-index: 1;
+}
+/************************************************************************************/
+@keyframes robot {
+  0%, 50%, 100% {
+    transform: translateY(0vh) rotate(7deg);
+ }
+  15%, 65% {
+    transform: translateY(-4vh) rotate(5deg);
+ }
+}
+@keyframes head {
+  0%, 100% {
+    transform: rotate(-5deg);
+ }
+  25%, 75% {
+    transform: rotate(15deg);
+ }
+  50% {
+    transform: rotate(0deg);
+ }
+}
+@keyframes trans {
+  0%, 100% {
+    transform: translateX(0vh);
+ }
+  50% {
+    transform: translateX(3vh);
+ }
+}
+@keyframes arms1 {
+  0%, 100% {
+    transform: rotate(50deg);
+ }
+  50% {
+    transform: rotate(-70deg);
+ }
+}
+@keyframes arms2 {
+  0%, 100% {
+    transform: rotate(-5deg);
+ }
+  50% {
+    transform: rotate(-100deg);
+ }
+}
+@keyframes legs1 {
+  0%, 100% {
+    transform: rotate(60deg);
+ }
+  40% {
+    transform: rotate(-90deg);
+ }
+}
+@keyframes legs2 {
+  0%, 100% {
+    transform: rotate(2deg);
+ }
+  33% {
+    transform: rotate(150deg);
+ }
+  50% {
+    transform: rotate(0deg);
+ }
+}
+@keyframes shadow {
+  0%, 50%, 100% {
+    transform: scale(1.5);
+ }
+  25%, 75% {
+    transform: scale(0.98);
+ }
+}
+
+.message-robot {
+  font-size: 18px;
+  position: absolute;
+  text-transform: uppercase;
+  -webkit-text-stroke: 0.1vw #326384;
+}
+.message-robot::before {
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  color: #37b9f1;
+  overflow: hidden;
+  position: absolute;
+  content: attr(data-text);
+  border-right: 2px solid #37b9f1;
+  -webkit-text-stroke: 0vw #f7f7fe;
+  animation: animate 6s linear infinite;
+}
+@keyframes animate {
+  0%, 10%, 100% {
+    width: 0;
+ }
+  70%, 90% {
+    width: 100%;
+ }
+}
 
 
