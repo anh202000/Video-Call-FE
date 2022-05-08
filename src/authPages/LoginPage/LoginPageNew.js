@@ -12,6 +12,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { setUsername } from "../../store/actions/dashboardActions";
 import { registerNewUser } from "../../utils/wssConnection/wssConnection";
 import { Typography } from "@mui/material";
+import Cookies from 'js-cookie';
 
 const LoginPageNew = ({ login, saveUsername }) => {
   const history = useHistory();
@@ -42,6 +43,12 @@ const LoginPageNew = ({ login, saveUsername }) => {
       .then((response) => {
         if (response.status === 200) {
           setUserList(response.data)
+          const checkAuth = response.data?.filter((item) =>
+              item?.username === document.cookie?.replace("token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1NDAiLCJleHAiOjE3Mjk0ODA2NTksImlhdCI6MTY0MzA4MDY1OX0.-yAjNmRzMKA6Sg5mj1qAu_TNKpWtlGgQBi05oPHiOcYek4oPxEdyVt3ASVl0aGY4Q6a0MD1-e7DCt8oCvtvXww", "")
+            )
+          if(checkAuth?.length > 0) {
+            history.push('/')
+          }
         }
       });
 
@@ -71,11 +78,12 @@ const LoginPageNew = ({ login, saveUsername }) => {
       });
     } else if (checkGmail?.length > 0 && checkPassword?.length > 0) {
       const inforUser = userList && userList?.filter((item) => item?.password === password && item?.mail === mail) || []
+      const authToken = `eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1NDAiLCJleHAiOjE3Mjk0ODA2NTksImlhdCI6MTY0MzA4MDY1OX0.-yAjNmRzMKA6Sg5mj1qAu_TNKpWtlGgQBi05oPHiOcYek4oPxEdyVt3ASVl0aGY4Q6a0MD1-e7DCt8oCvtvXww` + `${inforUser[0]?.username}`
       registerNewUser(inforUser[0]?.username);
       saveUsername(inforUser[0]?.username);
       toast.success('Login success', {
         position: "bottom-left",
-        autoClose: 5000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -84,16 +92,11 @@ const LoginPageNew = ({ login, saveUsername }) => {
       });
       setTimeout(
         () => {
+          Cookies.set('token', authToken);
           history.push('/')
         },
-        5000,
+        1000,
       );
-      const userDetails = {
-        mail,
-        password,
-      };
-      login(userDetails, history);
-
     }
   };
 
