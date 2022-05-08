@@ -1,0 +1,309 @@
+.login-page_container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} 
+
+.login-page_login_box {
+  width: 350px;
+  height: 500px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.login-page_logo_container {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+}
+
+.login-page_logo_image {
+  width: 200px;
+}
+
+.login-page_title_container {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-page_input_container {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+}
+
+.login-page_input {
+  width: 150px;
+  border-radius: 50px;
+  height: 30px;
+  outline:none;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px 10px;
+}
+
+.login-page_button_container {
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-page_button {
+  border-radius: 50px;
+  outline: none;
+  border: 1px solid #e6e5e8;
+  font-size: 16px;
+  padding: 10px 10px;
+  width: 170px;
+  transition: 0.3s;
+}
+
+.login-page_button:hover {
+  background-color: #8706f0;
+  opacity: 0.5;
+}
+
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  /* color: #e6e5e8; */
+  /* text-align: center; */
+}
+::-moz-placeholder { /* Firefox 19+ */
+  /* color: #e6e5e8; */
+  /* text-align: center; */
+}
+:-ms-input-placeholder { /* IE 10+ */
+  /* color: #e6e5e8; */
+  text-align: center;
+}
+:-moz-placeholder { /* Firefox 18- */
+  /* color: #e6e5e8; */
+  /* text-align: center; */
+}
+
+.home-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.home-page .body {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.home-page .body .left-side {
+  max-width: 500px;
+}
+.home-page .body .left-side .content h2 {
+  font-size: 44px;
+  font-weight: 400;
+  margin: 0;
+}
+.home-page .body .left-side .content p {
+  font-size: 18px;
+  font-weight: 300;
+}
+.home-page .body .left-side .content .action-btn {
+  margin-top: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.home-page .body .left-side .content .action-btn .btn {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  padding: 10px;
+  border: none;
+  outline: none;
+  background: #00796b;
+  border-radius: 5px;
+  color: #f6faf9;
+  text-decoration: none;
+}
+
+.home-page .body .left-side .content .action-btn .btn .icon-block {
+  padding-right: 10px;
+}
+.home-page .body .left-side .content .action-btn .btn:hover {
+  background: #f6faf9;
+  color: #00796b;
+}
+.home-page .body .left-side .content .action-btn .input-block {
+  margin-left: 20px;
+  display: flex;
+  flex: 1;
+}
+.home-page .body .left-side .content .action-btn .input-block .input-section {
+  position: relative;
+  margin-right: 10px;
+}
+.home-page .body .left-side .content .action-btn .input-block .input-section .icon-block {
+  position: absolute;
+  top: 50%;
+  transform: translate(10px, -50%);
+  color: #5f6368;
+}
+.home-page .body .left-side .content .action-btn .input-block .input-section input {
+  font-size: 16px;
+  height: 48px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding-left: 35px;
+  width: 100%;
+  box-sizing: border-box;
+  outline: none;
+}
+.home-page .body .left-side .help-text {
+  margin-top: 30px;
+  padding-top: 25px;
+  border-top: 1px solid #ddd;
+}
+.home-page .body .left-side .help-text a {
+  text-decoration: none;
+  color: #00796b;
+}
+.home-page .body .right-side .content {
+  border: 1px solid #eee;
+  padding: 30px;
+  width: 100%;
+  max-width: 650px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.302), 0 2px 6px 2px rgba(60, 64, 67, 0.149);
+}
+.home-page .body .right-side .content img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.animate-charcter
+{
+   text-transform: uppercase;
+  background-image: linear-gradient(
+    -225deg,
+    #231557 0%,
+    #44107a 29%,
+    #ff1361 67%,
+    #fff800 100%
+  );
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 2s linear infinite;
+  display: inline-block;
+      font-size: 190px;
+}
+
+@keyframes textclip {
+  to {
+    background-position: 200% center;
+  }
+}
+
+.avatars {
+  margin: 0 -8px;
+  /* Center the content */
+  display: inline-block;
+  vertical-align: middle;
+  /* Used to position the content */
+  position: relative;
+  /* Colors */
+  /* background: lightblue; */
+  color: #fff;
+  /* Rounded border */
+  border-radius: 50%;
+  height: 48px;
+  width: 48px;
+}
+
+.avatar__letterss {
+  /* Center the content */
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#slideshow {
+  margin:0 auto;
+  overflow:hidden;
+}
+
+.containerss {
+  width:1200px; /* 300 x 4 */
+  position:relative;
+  -webkit-animation:slide 8s ease-in-out infinite;
+  -moz-animation:slide 8s ease-in-out infinite;
+  -ms-animation:slide 8s ease-in-out infinite;
+  -o-animation:slide 8s ease-in-out infinite;
+  animation:slide 8s ease-in-out infinite;
+}
+
+.containerss {
+  width: 100%;
+  height: 100%;
+  float: left;
+  display: flex;
+}
+
+.containerss:hover {
+ animation-play-state:paused;
+ -webkit-animation-play-state:paused;
+}
+
+@-webkit-keyframes slide {
+  0% {left:0;}
+  25% {left:-300px;}
+  50% {left:-600px;}
+  75% {left:-900px;}
+  100% {left:0;}
+}
+@-moz-keyframes slide {
+  0% {left:0;}
+  25% {left:-300px;}
+  50% {left:-600px;}
+  75% {left:-900px;}
+  100% {left:0;}
+}
+@-ms-keyframes slide {
+  0% {left:0;}
+  25% {left:-300px;}
+  50% {left:-600px;}
+  75% {left:-900px;}
+  100% {left:0;}
+}
+@-o-keyframes slide {
+  0% {left:0;}
+  25% {left:-300px;}
+  50% {left:-600px;}
+  75% {left:-900px;}
+  100% {left:0;}
+}
+@keyframes slide {
+  0% {left:0;}
+  25% {left:-300px;}
+  50% {left:-600px;}
+  75% {left:-900px;}
+  100% {left:0;}
+}
+
+
+

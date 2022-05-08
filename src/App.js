@@ -8,12 +8,14 @@ import {
   useHistory,
 } from 'react-router-dom'
 import Dashboard from './Dashboard/Dashboard';
-import LoginPage from './LoginPage/LoginPage';
+import LoginPage from './HomePage/HomePage';
 import LoginPageNew from './authPages/LoginPage/LoginPageNew';
 import RegisterPage from './authPages/RegisterPage/RegisterPage';
 import ForgotPassworkPage from './authPages/ForgotPassword/ForgotPassword';
 import axios from 'axios';
 import { service } from './utils/service/api';
+import AboutPage from './About/AboutPage';
+import Blog from './Blog/Blog';
 
 function App() {
   const history = useHistory();
@@ -21,25 +23,6 @@ function App() {
   useEffect(() => {
     connectWithWebSocket();
   }, []);
-
-  useEffect(() => {
-    const getCookie = document.cookie
-    console.log(getCookie?.length, 'getCookie')
-    axios.get(
-      service.loginapi,
-      {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-      }
-    )
-      .then((response) => {
-        if (response.status === 200) {
-          const checkAuth = response.data
-          const getCookie = document.cookie?.replace("token", '')
-        }
-      });
-  }, [])
 
   return (
     <Router>
@@ -58,6 +41,12 @@ function App() {
           </Route>
         <Route path='/dashboard'>
           <Dashboard />
+        </Route>
+        <Route path='/blog'>
+          <Blog />
+        </Route>
+        <Route path='/about'>
+          <AboutPage />
         </Route>
         <Route path='/'>
           <LoginPage />
