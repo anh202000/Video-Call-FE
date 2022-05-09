@@ -1,43 +1,39 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../utils/sharedCustom/HeaderBar/header";
-import "./Blog.css";
-import { MdAdd, MdOutlineManageSearch, MdImage } from "react-icons/md";
-import { FiDelete } from 'react-icons/fi'
-import moment from "moment";
+import "./MnAcc.css";
+import { MdOutlineManageSearch, MdAdd } from "react-icons/md";
+import { IoIosCreate } from 'react-icons/io'
 import axios from "axios";
 import { When } from "react-if";
 import { service } from "../utils/service/api";
-import qs from "qs";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import randomColor from "randomcolor";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { FiDelete } from "react-icons/fi";
+import moment from 'moment'
+import qs from 'qs'
 
-const Blog = () => {
+const MnAcc = () => {
   const getUserName = document.cookie?.replace(
     "token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1NDAiLCJleHAiOjE3Mjk0ODA2NTksImlhdCI6MTY0MzA4MDY1OX0.-yAjNmRzMKA6Sg5mj1qAu_TNKpWtlGgQBi05oPHiOcYek4oPxEdyVt3ASVl0aGY4Q6a0MD1-e7DCt8oCvtvXww",
     ""
   );
-  const [file, setFile] = useState("");
-  const [content, setContent] = useState("");
-  const [contentS, setContentS] = useState("");
-  const [openPost, setOpenPost] = useState(false);
-  const [feed, setFeed] = useState([]);
-  const inputFile = useRef(null);
-  const [getRole, setGetRole] = useState([])
-  const history = useHistory();
-  console.log(getRole, 'getRole')
-  const getCookie = document.cookie;
 
+  const [contentS, setContentS] = useState("");
+
+  const [gmail, setGmail] = useState("");
+  const [userNm, setUserNm] = useState("");
+  const [pw, setPw] = useState("");
+
+  const [feed, setFeed] = useState([]);
+  const [getRole, setGetRole] = useState([])
+  const [openPost, setOpenPost] = useState(false);
+  const getCookie = document.cookie;
+  const history = useHistory();
   const getMoment = moment().format("YYYY-MM-DD HH:mm:ss");
+
   const showAddPost = () => {
     setOpenPost(!openPost);
-  };
-  const onClickImage = () => {
-    inputFile.current.click();
-  };
-
-  const onChangeContent = (event) => {
-    setContent(event.target.value);
   };
 
   const onChangeContentS = (event) => {
@@ -46,14 +42,14 @@ const Blog = () => {
 
   const getNewFeed = () => {
     axios
-      .get(service.createPost, {
+      .get("https://62737bd46b04786a0906fef7.mockapi.io/api/login/users", {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
       })
       .then((response) => {
         if (response.status === 200) {
-          setFeed(response.data);
+          setFeed(response?.data);
         }
       });
   };
@@ -62,56 +58,12 @@ const Blog = () => {
     getNewFeed();
   }, []);
 
-  const takeImage = (event) => {
-    const formData = new FormData();
-    formData.append("file", event.target.files[0]);
-    formData.append("upload_preset", "cloudfilesAnhLPT");
-    axios
-      .post(
-        "https://api.cloudinary.com/v1_1/anhlptstore/image/upload/",
-        formData
-      )
-      .then((response) => {
-        if (response.status === 200) {
-          setFile(response.data.url);
-        }
-      });
-  };
-
-  const createPosts = () => {
-    axios
-      .post(
-        service.createPost,
-        qs.stringify({
-          createdate: getMoment,
-          username: getUserName,
-          content: content,
-          comment: "",
-          url: file || "",
-        }),
-        {
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-        }
-      )
-      .then((response) => {
-        setContent("");
-        setFile("");
-        if (response.status === 201) {
-          getNewFeed();
-          toast.success("Register accout success", {
-            position: "bottom-left",
-            autoClose: 1000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-        }
-      });
-  };
+  const searchList =
+    feed &&
+    feed?.length > 0 &&
+    feed?.filter((item) =>
+      item.username.toLowerCase().includes(contentS.toLowerCase())
+    );
 
   useEffect(() => {
     if (getCookie?.length === 0) {
@@ -143,22 +95,47 @@ const Blog = () => {
     }
   }, [getCookie]);
 
-  const searchList =
-    feed &&
-    feed?.length > 0 &&
-    feed?.filter((item) =>
-      item.username.toLowerCase().includes(contentS.toLowerCase())
-    );
-
   const deletePost = (id) => {
     axios
-      .delete(`https://6277f14408221c96846b1e4e.mockapi.io/post/username/${id}`, {
+      .delete(`https://62737bd46b04786a0906fef7.mockapi.io/api/login/users/${id}`, {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
       })
       .then((response) => {
         if (response.status === 200) {
+          getNewFeed();
+          toast.success("Remove success", {
+            position: "bottom-left",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
+      });
+  }
+
+  const createAcc = () => {
+    axios
+      .post(`https://62737bd46b04786a0906fef7.mockapi.io/api/login/users`,
+        qs.stringify({
+          mail: gmail,
+          username: userNm,
+          password: pw,
+          role: "",
+        }), {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      })
+      .then((response) => {
+        if (response.status === 201) {
+          setGmail('')
+          setUserNm('')
+          setPw('')
           getNewFeed();
           toast.success("Remove success", {
             position: "bottom-left",
@@ -183,7 +160,7 @@ const Blog = () => {
               <input
                 className="input-search"
                 style={{ color: "#00796b", fontSize: "18px" }}
-                placeholder="Find name user"
+                placeholder="Find user name"
                 onChange={onChangeContentS}
               />
             </div>
@@ -243,6 +220,17 @@ const Blog = () => {
               {getUserName}
             </span>
 
+            <IoIosCreate
+              onClick={createAcc}
+              style={{
+                width: "28px",
+                height: "28px",
+                verticalAlign: "middle",
+                fill: "#00796b",
+                float: 'right'
+              }}
+            />
+
             <p
               style={{
                 color: "#000000",
@@ -255,54 +243,54 @@ const Blog = () => {
 
             <p
               style={{
-                fontSize: "16px",
-              }}
-            >
-              {content || ""}
-            </p>
-
-            <When condition={file?.length > 0}>
-              <img class="img-new-post" src={file} />
-            </When>
-
-            <textarea
-              class="write-post"
-              placeholder="Enter new post here!!!"
-              onChange={onChangeContent}
-            />
-            <MdImage
-              onClick={onClickImage}
-              style={{
-                width: "28px",
-                height: "28px",
-                marginLeft: "4px",
-                margin: "2px 0px 0px 10px",
-                fill: "#00796b",
-              }}
-            />
-            <input
-              type="file"
-              id="file"
-              accept="image/png, image/gif, image/jpeg, video/mp4,video/x-m4v,video/*"
-              ref={inputFile}
-              style={{ display: "none" }}
-              onChange={takeImage}
-            />
-
-            <span
-              style={{
-                position: "absolute",
                 color: "#00796b",
                 fontSize: "18px",
                 fontWeight: "bold",
-                margin: "10px 0px 0px 10px",
-                verticalAlign: "middle",
-                cursor: "pointer",
+                margin: "10px 4px 6px 4px",
               }}
-              onClick={content?.length > 0 ? createPosts : () => { }}
             >
-              Post
-            </span>
+              Gmail
+            </p>
+
+            <input
+              class="write-post"
+              placeholder="Enter new password here!!!"
+              onChange={(event) => setGmail(event.target.value)}
+            />
+
+            <p
+              style={{
+                color: "#00796b",
+                fontSize: "18px",
+                fontWeight: "bold",
+                margin: "10px 4px 6px 4px",
+              }}
+            >
+              User name
+            </p>
+
+            <input
+              class="write-post"
+              placeholder="Enter new user name here!!!"
+              onChange={(event) => setUserNm(event.target.value)}
+            />
+
+            <p
+              style={{
+                color: "#00796b",
+                fontSize: "18px",
+                fontWeight: "bold",
+                margin: "10px 4px 6px 4px",
+              }}
+            >
+              Password
+            </p>
+
+            <input
+              class="write-post"
+              placeholder="Enter new password here!!!"
+              onChange={(event) => setPw(event.target.value)}
+            />
           </div>
         </div>
       </When>
@@ -318,7 +306,7 @@ const Blog = () => {
                   <div
                     class="avatars"
                     style={{
-                      background: item?.username === getUserName ? "#00796b" : color,
+                      background: color,
                       cursor: "pointer",
                       marginRight: "10px",
                     }}
@@ -327,16 +315,6 @@ const Blog = () => {
                       {item?.username?.slice(0, 2)}
                     </div>
                   </div>
-                  <span
-                    style={{
-                      color: "#00796b",
-                      fontSize: "18px",
-                      fontWeight: "bold",
-                      margin: "0px 4px 0px 4px",
-                    }}
-                  >
-                    {item?.username}
-                  </span>
 
                   <When condition={getRole[0]?.role === 'admin'}>
                     <FiDelete
@@ -351,34 +329,54 @@ const Blog = () => {
                     />
                   </When>
 
-                  <p
+                  <span
                     style={{
-                      color: "#000000",
-                      fontSize: "12px",
-                      margin: "-16px 0px 30px 52px",
+                      color: "#00796b",
+                      fontSize: "18px",
+                      fontWeight: "bold",
+                      margin: "0px 4px 0px 4px",
                     }}
                   >
-                    {item?.createdate}
-                  </p>
+                    {item?.username}
+                  </span>
 
-                  <p
-                    style={{
-                      fontSize: "16px",
-                    }}
-                  >
-                    {item?.content}
-                  </p>
+                  <div style={{ marginTop: '30px' }}>
+                    <p
+                      style={{
+                        color: "#000000",
+                        fontSize: "16px",
+                        margin: "-16px 0px 30px 52px",
+                      }}
+                    >
+                      Name: {item?.username}
+                    </p>
 
-                  <When condition={item?.url}>
-                    <img class="img-post" src={item?.url} />
-                  </When>
+                    <p
+                      style={{
+                        color: "#000000",
+                        fontSize: "16px",
+                        margin: "-16px 0px 30px 52px",
+                      }}
+                    >
+                      Gmail: {item?.mail}
+                    </p>
+
+                    <p
+                      style={{
+                        color: "#000000",
+                        fontSize: "16px",
+                        margin: "-16px 0px 30px 52px",
+                      }}
+                    >
+                      Password: {item?.password}
+                    </p>
+                  </div>
                 </div>
               </div>
             );
-          })
-          ?.reverse()}
+          })}
     </div>
   );
 };
 
-export default Blog;
+export default MnAcc;

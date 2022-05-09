@@ -27,13 +27,13 @@ const Dashboard = ({ username, callState }, props) => {
       <div className="dashboard_left_section">
         <div className="dashboard_content_container" id="dashboard_content_container">
           <DirectCall onClickShowRightList={onClickShowRightList} showRightList={showRightList} />
-          <GroupCall />
+          <GroupCall onClickShowRightList={onClickShowRightList} showRightList={showRightList}/>
           {callState !== callStates.CALL_IN_PROGRESS && (
             <DashboardInformation username={username} />
           )}
         </div>
         <div className="dashboard_rooms_container background_secondary_color">
-          <GroupCallRoomsList />
+          <GroupCallRoomsList onClickShowRightList={onClickShowRightList} showRightList={showRightList}/>
         </div>
       </div>
       <div className="dashboard_right_section background_secondary_color">
@@ -42,10 +42,6 @@ const Dashboard = ({ username, callState }, props) => {
             <ActiveUsersList />
           </div>
         </When>
-
-        <div className="dashboard_logo_container">
-          <img className="dashboard_logo_image" src={logo} />
-        </div>
       </div>
     </div>
   );

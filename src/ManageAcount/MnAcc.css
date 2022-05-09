@@ -1,0 +1,143 @@
+.action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.action-btn .btn {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    padding: 10px;
+    border: none;
+    outline: none;
+    background: #00796b;
+    border-radius: 5px;
+    margin-left: 20px;
+    color: #f6faf9;
+    text-decoration: none;
+}
+
+.action-btn .btn:hover {
+    background: #f6faf9;
+    color: #00796b;
+}
+
+.action-btn .input-block {
+    margin-left: 20px;
+    display: flex;
+    flex: 1;
+}
+
+.input-block .input-section .input-search {
+    font-size: 16px;
+    height: 48px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding-left: 35px;
+    width: 40rem;
+    box-sizing: border-box;
+    outline: none;
+}
+
+#add-buttons {
+    direction: rtl;
+    width: 50px;
+    height: 50px;
+    float: right;
+    background-color: #ff95c8;
+    border-radius: 50px;
+    transition: width 800ms;
+    overflow: hidden;
+    box-shadow: 2px 2px 9px #d3d1d2b0;
+}
+
+.content-post {
+    width: 700px;
+    max-width: 700px;
+    height: auto;
+    background: chartreuse;
+    margin: 20px 0;
+    background-color: #fff;
+    box-shadow: 2px 1px 2px rgba(50, 50, 50, .2),
+        0px 2px 4px rgba(60, 60, 60, 0.4);
+    border-radius: 5px;
+    padding: 30px;
+    z-index: 999;
+}
+
+.img-post {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+    border-radius: 18px;
+}
+
+.img-new-post {
+    width: 50%;
+    max-width: 50%;
+    height: auto;
+    border-radius: 18px;
+    margin: 10px 0px 10px 0px;
+}
+
+.video-post {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 18px;
+}
+
+.video-new-post {
+    width: 50%;
+    max-width: 50%;
+    height: auto;
+    border-radius: 18px;
+    margin: 10px 0px 10px 0px;
+}
+
+.write-post {
+    width: 950%;
+    max-width: 95%;
+    height: auto;
+    padding: 10px;
+    border-radius: 10px;
+    transition: all ease-in-out 0.5s;
+    appearance: none;
+    -webkit-appearance: none;
+    font-size: 16px;
+    border: 1px solid rgba(6, 81, 37, 0.5);
+}
+
+textarea:focus {
+    transition: all ease-in-out 0.5s;
+    height: 200px;
+}
+
+.content-post h2 {
+    font-weight: 800;
+    margin: 10px 0;
+}
+
+.content-post p {
+    margin: 10px 0;
+    color: rgb(82, 80, 80);
+    font-size: 1.1rem;
+}
+
+.content-post h4 {
+    font-weight: 90;
+    margin: 15px 0;
+    font-size: 15px;
+}
+
+.body-post {
+    flex: 1;
+    margin-top: 60px;
+    align-items: center;
+    justify-content: space-between;
+    align-self: center;
+}

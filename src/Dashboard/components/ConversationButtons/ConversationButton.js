@@ -7,7 +7,7 @@ const styles = {
     borderRadius: '40px',
     border: '2px solid #e6e5e8',
     textDecoration: 'none',
-    backgroundColor: '#282C34',
+    backgroundColor: '#00796b',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

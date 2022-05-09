@@ -16,6 +16,8 @@ import axios from 'axios';
 import { service } from './utils/service/api';
 import AboutPage from './About/AboutPage';
 import Blog from './Blog/Blog';
+import Files from './Files/Files';
+import MnAcc from './ManageAcount/MnAcc';
 
 function App() {
   const history = useHistory();
@@ -41,6 +43,12 @@ function App() {
           </Route>
         <Route path='/dashboard'>
           <Dashboard />
+        </Route>
+        <Route path='/manage-accout'>
+          <MnAcc />
+        </Route>
+        <Route path='/files'>
+          <Files />
         </Route>
         <Route path='/blog'>
           <Blog />
