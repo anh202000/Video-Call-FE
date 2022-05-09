@@ -1,12 +1,18 @@
 import Cookies from "js-cookie";
 import randomColor from "randomcolor";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { When } from "react-if";
 import { useHistory, useLocation } from "react-router-dom";
 import "./styled.css";
 import { ToastContainer, toast } from "react-toastify";
+import axios from "axios";
+import { service } from "../../service/api";
 
 const Header = () => {
+  const [getRole, setGetRole] = useState([])
+  console.log(getRole, 'getRole')
+  const getCookie = document.cookie;
+
   var color = randomColor();
   const history = useHistory();
   const getUserName = document.cookie?.replace(
@@ -37,6 +43,37 @@ const Header = () => {
       progress: undefined,
     });
   };
+
+  useEffect(() => {
+    if (getCookie?.length === 0) {
+      history.push("/login");
+    } else {
+      axios
+        .get(service.loginapi, {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        })
+        .then((response) => {
+          if (response.status === 200) {
+            const checkAuth = response.data?.filter(
+              (item) =>
+                item?.username ===
+                getCookie?.replace(
+                  "token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1NDAiLCJleHAiOjE3Mjk0ODA2NTksImlhdCI6MTY0MzA4MDY1OX0.-yAjNmRzMKA6Sg5mj1qAu_TNKpWtlGgQBi05oPHiOcYek4oPxEdyVt3ASVl0aGY4Q6a0MD1-e7DCt8oCvtvXww",
+                  ""
+                )
+            );
+            if (checkAuth?.length === 0) {
+              history.push("/login");
+            } else {
+              setGetRole(checkAuth)
+            }
+          }
+        });
+    }
+  }, [getCookie]);
+
   return (
     <div className="header">
       <div className="logo">
@@ -72,6 +109,7 @@ const Header = () => {
         </div>
       </div>
       <div className="action-btn">
+        <When condition={getRole[0]?.role !== 'admin'}>
         <h2
           style={getPathName === "/" ? { fontSize: "20px" } : {}}
           class="links"
@@ -79,6 +117,9 @@ const Header = () => {
         >
           Home Page
         </h2>
+        </When>
+        
+        <When condition={getRole[0]?.role !== 'admin'}>
         <h2
           style={getPathName === "/about" ? { fontSize: "20px" } : {}}
           class="links"
@@ -86,26 +127,32 @@ const Header = () => {
         >
           About
         </h2>
+        </When>
+
+        <When condition={getRole[0]?.role === 'admin'}>
         <h2
-          style={getPathName === "/ratting" ? { fontSize: "20px" } : {}}
+          style={getPathName === "/manage-accout" ? { fontSize: "20px" } : {}}
           class="links"
-          onClick={() => history.push("/ratting")}
+          onClick={() => history.push("/manage-accout")}
         >
-          Ratting
+          Manage account
         </h2>
+        </When>
+
         <h2
           style={getPathName === "/blog" ? { fontSize: "20px" } : {}}
           class="links"
           onClick={() => history.push("/blog")}
         >
-          Blog SVC
+          {getRole[0]?.role !== 'admin' ? "Blog SVC" : "Manage Blog"} 
         </h2>
+
         <h2
           style={getPathName === "/files" ? { fontSize: "20px" } : {}}
           class="links"
           onClick={() => history.push("/files")}
         >
-          Files
+           {getRole[0]?.role !== 'admin' ? "Files" : "Manage files"} 
         </h2>
 
         <div

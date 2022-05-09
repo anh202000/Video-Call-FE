@@ -28,13 +28,13 @@ export const styles = {
 };
 
 const ChatForm = ({ username, callerUserName }) => {
-    console.log(callerUserName, 'callerUserName')
     const getMoment = moment().format('HH:mm:ss');
     const [state, setState] = useState({ message: "", name: username, timeSend: getMoment, roomId: [callerUserName, username], urlImg: '' })
     const [chat, setChat] = useState([])
     const [emoji, setEmoji] = useState(false);
     const [color, setColor] = useState("");
     const [file, setFile] = useState("");
+    const [fileSize, setFileSize] = useState({});
 
     const socketRef = useRef()
     const inputFile = useRef(null)
@@ -79,6 +79,7 @@ const ChatForm = ({ username, callerUserName }) => {
 
     const takeImage = (event) => {
         const formData = new FormData()
+        console.log(event.target.files[0], 'event.target.files[0]')
         formData.append("file", event.target.files[0])
         formData.append("upload_preset", "cloudfilesAnhLPT")
         axios
@@ -89,6 +90,7 @@ const ChatForm = ({ username, callerUserName }) => {
             .then((response) => {
                 if (response.status === 200) {
                     setFile(response.data.url)
+                    setFileSize(event.target.files[0])
                     setState({ message: '', name: username, timeSend: getMoment, roomId: [callerUserName, username], urlImg: response.data.url })
                 }
             });
@@ -105,6 +107,25 @@ const ChatForm = ({ username, callerUserName }) => {
     const onMessageSubmit = (e) => {
         const { name, message, timeSend, roomId, urlImg } = state
         socketRef.current.emit("message", { name, message, timeSend, roomId, urlImg })
+        if (urlImg?.length > 0) {
+            axios
+                .post(
+                    "https://6162d627c48338001730074e.mockapi.io/assign/mount",
+                    {
+                        name: name,
+                        url: urlImg,
+                        time: timeSend,
+                        size: fileSize?.size,
+                        filename: fileSize?.name
+                    }
+                )
+                .then((response) => {
+                    if (response.status === 200) {
+                        setFileSize({});
+                    }
+                });
+        }
+        setFileSize({})
         setState({ message: "", name, timeSend, roomId, urlImg })
         setFile('')
     }

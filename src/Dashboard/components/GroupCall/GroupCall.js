@@ -6,9 +6,11 @@ import * as webRTCGroupCallHandler from '../../../utils/webRTC/webRTCGroupCallHa
 import GroupCallRoom from '../GroupCallRoom/GroupCallRoom';
 import PopupRoom from '../PopupRoom/PopupRoom';
 import { When } from 'react-if'
+import Messenger from '../Messenger/Messenger';
 
 const GroupCall = (props) => {
-  const { callState, localStream, groupCallActive, groupCallStreams } = props;
+  const { callState, localStream, groupCallActive, groupCallStreams, showRightList, onClickShowRightList, message, setDirectCallMessage, username  } = props;
+  console.log(props, 'props')
   const { groupCallRooms } = props;
   const [showPopup, setShowPopup] = useState(false)
   const onClickShowRoom = () => setShowPopup(!showPopup)
@@ -30,6 +32,7 @@ const GroupCall = (props) => {
         <GroupCallButton onClickHandler={onClickShowRoom} label='Create room' />}
       {groupCallActive && <GroupCallRoom {...props} leaveRoom={leaveRoom}/>}
       {groupCallActive && <GroupCallButton onClickHandler={leaveRoom} label='Leave room' />}
+      {groupCallActive && <Messenger showRightList={showRightList} onClickShowRightList={onClickShowRightList} message={message} setDirectCallMessage={setDirectCallMessage} username={username} callerUserName={username}/>}
     </>
   );
 };

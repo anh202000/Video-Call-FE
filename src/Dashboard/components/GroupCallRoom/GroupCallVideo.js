@@ -2,8 +2,8 @@ import React, { useRef, useEffect } from 'react';
 
 const styles = {
   videoContainer: {
-    width: "12.37rem",
-    height: "13.375rem",
+    width: "100%",
+    height: "16.375rem",
     borderRadius: "0.5rem",
   },
   videoElement: {
