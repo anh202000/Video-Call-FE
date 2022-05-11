@@ -1,8 +1,8 @@
 .menu-context {
     position: absolute;
     width: 120px;
-    height: 200px;
-    top: calc(50% - 200px);
+    height: 100px;
+    top: calc(50% - 100px);
     right: calc(40px - 50%);
     display: flex;
     flex-direction: column;

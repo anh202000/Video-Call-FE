@@ -97,9 +97,6 @@ const ConversationButtons = (props) => {
           <ul>
             <li><a onClick={onClickFullScreen}>Full screen</a></li>
             <li><a onClick={onClickWhiteBoard}>White board</a></li>
-            <li><a >Report</a></li>
-            <li><a >Contact</a></li>
-            <li><a >About</a></li>
           </ul>
         </div>
       </When>
