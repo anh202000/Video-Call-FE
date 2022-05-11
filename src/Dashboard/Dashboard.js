@@ -23,7 +23,7 @@ const Dashboard = ({ username, callState }, props) => {
     setShowRightList(!showRightList)
   }
   return (
-    <div className="dashboard_container background_main_color">
+    <div className="dashboard_container background_main_color_new">
       <div className="dashboard_left_section">
         <div className="dashboard_content_container" id="dashboard_content_container">
           <DirectCall onClickShowRightList={onClickShowRightList} showRightList={showRightList} />

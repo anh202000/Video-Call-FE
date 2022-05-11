@@ -79,8 +79,8 @@ const LoginPageNew = ({ login, saveUsername }) => {
     } else if (checkGmail?.length > 0 && checkPassword?.length > 0) {
       const inforUser = userList && userList?.filter((item) => item?.password === password && item?.mail === mail) || []
       const authToken = `eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1NDAiLCJleHAiOjE3Mjk0ODA2NTksImlhdCI6MTY0MzA4MDY1OX0.-yAjNmRzMKA6Sg5mj1qAu_TNKpWtlGgQBi05oPHiOcYek4oPxEdyVt3ASVl0aGY4Q6a0MD1-e7DCt8oCvtvXww` + `${inforUser[0]?.username}`
-      registerNewUser(inforUser[0]?.username);
-      saveUsername(inforUser[0]?.username);
+      // registerNewUser(inforUser[0]?.username);
+      // saveUsername(inforUser[0]?.username);
       toast.success('Login success', {
         position: "bottom-left",
         autoClose: 1000,
